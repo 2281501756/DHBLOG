@@ -1,0 +1,125 @@
+<template>
+  <div class="image">
+    <div class="title">
+      <div style="margin: 20px">{{ title }}</div>
+      <div style="position: relative" class="talk">
+        <div v-for="(item, i) in talkData" :key="i">
+          <transition name="talk">
+            <div v-if="i === talkIndex" style="line-height: 25px">
+              {{ item }}
+            </div>
+          </transition>
+        </div>
+      </div>
+    </div>
+    <img
+      class="header-image"
+      :src="`${this.$base_url}/static/image/background/` + imageURL1 + '.jpg'"
+      alt=""
+      style="width: 100%; object-position: center; object-fit: cover"
+    />
+    <img
+      class="header-image"
+      :src="`${this.$base_url}/static/image/background/` + imageURL2 + '.jpg'"
+      alt=""
+      style="width: 100%; object-position: center; object-fit: cover"
+    />
+    <div class="arrows"><i class="el-icon-d-arrow-left"></i>></div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      imageURL1: Math.floor(Math.random() * 14 + 1),
+      imageURL2: Math.floor(Math.random() * 14 + 1),
+      imageActive: 1,
+      talkIndex: 1,
+      intervalID1: 0,
+      intervalID2: 0,
+    };
+  },
+  props: ["talkData", "title"],
+  mounted() {
+    if (this.talkData) {
+      this.intervalID1 = setInterval(() => {
+        this.talkIndex = (this.talkIndex + 1) % this.talkData.length;
+      }, 5000);
+    }
+
+    //轮播图动画
+    let img = document.querySelectorAll(".header-image");
+    this.intervalID2 = setInterval(() => {
+      if (this.imageActive === 1) {
+        img[1].style.opacity = 0;
+        img[0].style.opacity = 100;
+        setTimeout(() => {
+          this.imageURL2 = Math.floor(Math.random() * 14 + 1);
+        }, 2000);
+        this.imageActive = 0;
+      } else {
+        img[1].style.opacity = 100;
+        img[0].style.opacity = 0;
+        setTimeout(() => {
+          this.imageURL1 = Math.floor(Math.random() * 14 + 1);
+        }, 2000);
+        this.imageActive = 1;
+      }
+    }, 8000);
+  },
+  destroyed() {
+    clearInterval(this.intervalID1);
+    clearInterval(this.intervalID2);
+  },
+};
+</script>
+
+<style scoped>
+.image {
+  position: relative;
+}
+.image > img {
+  position: absolute;
+  transition: opacity 1s;
+}
+.title {
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.title > div {
+  font-size: 30px;
+}
+.talk > div {
+  font-size: 18px;
+  position: absolute;
+  width: 500px;
+  margin-left: -250px;
+  text-align: center;
+}
+.talk-enter-active {
+  animation: bounce-in 1s;
+}
+.arrows {
+  height: 50;
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: translateX(100px) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0) scale(1);
+  }
+}
+</style>

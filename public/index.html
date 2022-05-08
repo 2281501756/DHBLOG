@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <style>
+    #loading {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #loading-container {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(blue, transparent 40%);
+      border-radius: 50%;
+      position: relative;
+      animation: loading 3s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    #loading-container::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: linear-gradient(blue, transparent 40%);
+      z-index: -1;
+      filter: blur(30px);
+    }
+
+    #loading-container::after {
+      content: "";
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #f4f5f7;
+    }
+
+    @keyframes loading {
+      33% {
+        transform: rotate(360deg);
+        filter: hue-rotate(120deg);
+      }
+
+      66% {
+        transform: rotate(720deg);
+        filter: hue-rotate(240deg);
+      }
+
+      100% {
+        transform: rotate(1080deg);
+        filter: hue-rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <div id="loading">
+    <div id="loading-container"></div>
+  </div>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>
