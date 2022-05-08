@@ -1,4 +1,4 @@
-  <template>
+<template>
   <div class="label">
     <div class="color" ref="color"></div>
     <div class="text">{{ text }}</div>
@@ -7,11 +7,11 @@
 
 <script>
 export default {
-  props: ["color", "text"],
+  props: ['color', 'text'],
   mounted() {
-    this.$refs.color.style.backgroundColor = this.color;
-  },
-};
+    this.$refs.color.style.backgroundColor = this.color
+  }
+}
 </script>
 
 <style scoped>

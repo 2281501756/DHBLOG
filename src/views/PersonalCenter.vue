@@ -66,48 +66,48 @@
 </template>
 
 <script>
-import NavVue from "../layout/body/views/Nav.vue";
-import ArticleCardMini from "./components/ArticleCardMini.vue";
-import { getUserArticle } from "../api/article";
-import { getForID } from "../api/user";
+import NavVue from '../layout/body/views/Nav.vue'
+import ArticleCardMini from './components/ArticleCardMini.vue'
+import { getUserArticle } from '../api/article'
+import { getForID } from '../api/user'
 export default {
   components: {
     NavVue,
-    ArticleCardMini,
+    ArticleCardMini
   },
   data() {
     return {
       userid: null,
       navIndex: 1,
       userArticle: {},
-      userData: {},
-    };
+      userData: {}
+    }
   },
   methods: {
     async getArticleData(id) {
-      this.userArticle = await (await getUserArticle(id)).data;
+      this.userArticle = await (await getUserArticle(id)).data
     },
     async getUserData(id) {
-      this.userData = await (await getForID(id)).data[0];
-      console.log(this.userData);
-    },
+      this.userData = await (await getForID(id)).data[0]
+      console.log(this.userData)
+    }
   },
   mounted() {
-    console.log("文章界面修改 并且获取数据");
-    this.userid = this.$route.params.id;
-    this.getArticleData(this.userid);
-    this.getUserData(this.userid);
+    console.log('文章界面修改 并且获取数据')
+    this.userid = this.$route.params.id
+    this.getArticleData(this.userid)
+    this.getUserData(this.userid)
   },
   watch: {
     $route() {
-      console.log("文章界面修改 ");
-      this.$destroy();
-    },
+      console.log('文章界面修改 ')
+      this.$destroy()
+    }
   },
   destroyed() {
-    console.log("销毁");
-  },
-};
+    console.log('销毁')
+  }
+}
 </script>
 
 <style scoped>
@@ -154,7 +154,7 @@ export default {
 }
 .left-top-user-data > div:nth-child(1):after,
 .left-top-user-data > div:nth-child(2):after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   right: 0;
@@ -192,7 +192,7 @@ export default {
   display: inline-block;
   height: 40px;
   width: 80px;
-  font-family: "PingFang SC,DFPKingGothicGB-Medium,sans-serif";
+  font-family: 'PingFang SC,DFPKingGothicGB-Medium,sans-serif';
   text-align: center;
   line-height: 40px;
   font-weight: 500;

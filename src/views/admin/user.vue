@@ -91,74 +91,73 @@
 
 <script>
 export default {
-  name: "user",
+  name: 'user',
   data() {
     return {
-      searchData: "wanbuwan",
+      searchData: 'wanbuwan',
       tableData: [],
       currentPage: 1,
       pageSize: 7,
       dialogFormVisible: false,
       dialogIndex: 0,
-      dialogNickname: "",
-      dialogPhoto: "",
-      dialogMoney: "",
-      dialogIsSuper: "",
-      dialogAccount: "",
-    };
+      dialogNickname: '',
+      dialogPhoto: '',
+      dialogMoney: '',
+      dialogIsSuper: '',
+      dialogAccount: ''
+    }
   },
   methods: {
     currentChange(val) {
-      this.currentPage = val;
+      this.currentPage = val
     },
     handleEdit(index, data) {
-      this.dialogIndex = index;
-      this.dialogAccount = data.account;
-      this.dialogNickname = data.nickname;
-      this.dialogIsSuper = data.is_super;
-      this.dialogMoney = data.money;
-      this.dialogPhoto = data.photo;
-      this.dialogFormVisible = true;
+      this.dialogIndex = index
+      this.dialogAccount = data.account
+      this.dialogNickname = data.nickname
+      this.dialogIsSuper = data.is_super
+      this.dialogMoney = data.money
+      this.dialogPhoto = data.photo
+      this.dialogFormVisible = true
     },
     async dialogSubmit() {
-      let res = await this.$post("/admin/changeUser", {
+      let res = await this.$post('/admin/changeUser', {
         account: this.dialogAccount,
         nickname: this.dialogNickname,
         money: this.dialogMoney,
         photo: this.dialogPhoto,
-        is_super: this.dialogIsSuper,
-      });
-      if (res.data.result === "error") {
+        is_super: this.dialogIsSuper
+      })
+      if (res.data.result === 'error') {
         this.$notify({
-          title: "警告",
-          message: "修改失败",
-          type: "warning",
-        });
+          title: '警告',
+          message: '修改失败',
+          type: 'warning'
+        })
       } else {
-        this.tableData[this.dialogIndex].nickname = this.dialogNickname;
-        this.tableData[this.dialogIndex].money = this.dialogMoney;
-        this.tableData[this.dialogIndex].photo = this.dialogPhoto;
-        this.tableData[this.dialogIndex].is_super = this.dialogIsSuper;
+        this.tableData[this.dialogIndex].nickname = this.dialogNickname
+        this.tableData[this.dialogIndex].money = this.dialogMoney
+        this.tableData[this.dialogIndex].photo = this.dialogPhoto
+        this.tableData[this.dialogIndex].is_super = this.dialogIsSuper
         this.$notify({
-          title: "成功",
-          message: "成功修改用户信息",
-          type: "success",
-        });
-        this.dialogFormVisible = false;
+          title: '成功',
+          message: '成功修改用户信息',
+          type: 'success'
+        })
+        this.dialogFormVisible = false
       }
     },
     async handleDelete(index, data) {
-      await this.$get(`/admin/deleteUser?account=${data.account}`);
-      this.tableData.splice(index, 1);
-    },
+      await this.$get(`/admin/deleteUser?account=${data.account}`)
+      this.tableData.splice(index, 1)
+    }
   },
   beforeCreate() {
-    this.$get("/admin/findUser").then((Response) => {
-      this.tableData = Response.data;
-    });
-  },
-};
+    this.$get('/admin/findUser').then((Response) => {
+      this.tableData = Response.data
+    })
+  }
+}
 </script>
 
-<style>
-</style>
+<style></style>

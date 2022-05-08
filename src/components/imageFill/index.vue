@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import baseURl from "../../../manage/util/baseURl";
+import baseURl from '../../../manage/util/baseURl'
 export default {
   data() {
     return {
@@ -27,112 +27,112 @@ export default {
       addButtonStatus: false,
       subButtonStatus: false,
       addTimeID: 0,
-      subTimeID: 0,
-    };
+      subTimeID: 0
+    }
   },
   props: {
     url: {
       type: String,
-      default: `${baseURl}/static/image/articleImage/1.jpg`,
-    },
+      default: `${baseURl}/static/image/articleImage/1.jpg`
+    }
   },
   methods: {
     addButtonDownEvent() {
-      this.addButtonStatus = true;
+      this.addButtonStatus = true
       this.addTimeID = setInterval(() => {
-        let width = parseInt(this.$refs.img.width);
-        this.$refs.img.style.width = width + 10 + "px";
-      }, 25);
+        let width = parseInt(this.$refs.img.width)
+        this.$refs.img.style.width = width + 10 + 'px'
+      }, 25)
     },
     addButtonUpEvent() {
-      this.addButtonStatus = false;
+      this.addButtonStatus = false
     },
     addButtonLeaveEven() {
-      this.addButtonStatus = false;
+      this.addButtonStatus = false
     },
 
     subButtonDownEvent() {
-      this.subButtonStatus = true;
+      this.subButtonStatus = true
       this.subTimeID = setInterval(() => {
-        let width = parseInt(this.$refs.img.width);
-        this.$refs.img.style.width = width - 10 + "px";
-      }, 25);
+        let width = parseInt(this.$refs.img.width)
+        this.$refs.img.style.width = width - 10 + 'px'
+      }, 25)
     },
     subButtonUpEvent() {
-      this.subButtonStatus = false;
+      this.subButtonStatus = false
     },
     subButtonLeaveEven() {
-      this.subButtonStatus = false;
+      this.subButtonStatus = false
     },
     hide() {
-      window.removeEventListener("mousewheel", this.wheelEvent);
-      this.$el.parentNode.removeChild(this.$el);
-      this.$destroy();
+      window.removeEventListener('mousewheel', this.wheelEvent)
+      this.$el.parentNode.removeChild(this.$el)
+      this.$destroy()
     },
     wheelEvent(e) {
-      e.preventDefault();
-      let width = parseInt(this.$refs.img.width);
+      e.preventDefault()
+      let width = parseInt(this.$refs.img.width)
       if (e.deltaY > 0) {
-        this.$refs.img.style.width = width - 25 + "px";
+        this.$refs.img.style.width = width - 25 + 'px'
       } else {
-        this.$refs.img.style.width = width + 25 + "px";
+        this.$refs.img.style.width = width + 25 + 'px'
       }
     },
     imgMouseDown(e) {
-      e.preventDefault && e.preventDefault();
-      this.imgEnter = true;
-      this.clickX = e.offsetX;
-      this.clickY = e.offsetY;
+      e.preventDefault && e.preventDefault()
+      this.imgEnter = true
+      this.clickX = e.offsetX
+      this.clickY = e.offsetY
     },
     imgMouseup() {
-      this.imgEnter = false;
+      this.imgEnter = false
     },
     imgMouseMove(e) {
-      this.$refs.img.style.top = e.clientY - this.clickY + "px";
-      this.$refs.img.style.left = e.clientX - this.clickX + "px";
-    },
+      this.$refs.img.style.top = e.clientY - this.clickY + 'px'
+      this.$refs.img.style.left = e.clientX - this.clickX + 'px'
+    }
   },
   mounted() {
-    this.$el.addEventListener("mousewheel", this.wheelEvent);
-    this.$refs.img.addEventListener("mousedown", this.imgMouseDown);
-    this.$refs.img.addEventListener("mouseup", this.imgMouseup);
-    this.$refs.add.addEventListener("mousedown", this.addButtonDownEvent);
-    this.$refs.sub.addEventListener("mousedown", this.subButtonDownEvent);
+    this.$el.addEventListener('mousewheel', this.wheelEvent)
+    this.$refs.img.addEventListener('mousedown', this.imgMouseDown)
+    this.$refs.img.addEventListener('mouseup', this.imgMouseup)
+    this.$refs.add.addEventListener('mousedown', this.addButtonDownEvent)
+    this.$refs.sub.addEventListener('mousedown', this.subButtonDownEvent)
   },
   watch: {
     imgEnter(newValue) {
       if (newValue)
-        this.$refs.img.addEventListener("mousemove", this.imgMouseMove);
-      else this.$refs.img.removeEventListener("mousemove", this.imgMouseMove);
+        this.$refs.img.addEventListener('mousemove', this.imgMouseMove)
+      else this.$refs.img.removeEventListener('mousemove', this.imgMouseMove)
     },
     addButtonStatus(newValue) {
       if (newValue) {
-        this.$refs.add.addEventListener("mouseup", this.addButtonUpEvent);
-        this.$refs.add.addEventListener("mouseleave", this.addButtonLeaveEven);
+        this.$refs.add.addEventListener('mouseup', this.addButtonUpEvent)
+        this.$refs.add.addEventListener('mouseleave', this.addButtonLeaveEven)
       } else {
-        clearInterval(this.addTimeID);
-        this.$refs.add.removeEventListener("mouseup", this.addButtonUpEvent);
+        clearInterval(this.addTimeID)
+        this.$refs.add.removeEventListener('mouseup', this.addButtonUpEvent)
         this.$refs.add.removeEventListener(
-          "mouseleave",
+          'mouseleave',
           this.addButtonLeaveEven
-        );
+        )
       }
     },
     subButtonStatus(newValue) {
       if (newValue) {
-        this.$refs.sub.addEventListener("mouseup", this.subButtonUpEvent);
-        this.$refs.sub.addEventListener("mouseleave", this.subButtonLeaveEven);
+        this.$refs.sub.addEventListener('mouseup', this.subButtonUpEvent)
+        this.$refs.sub.addEventListener('mouseleave', this.subButtonLeaveEven)
       } else {
-        clearInterval(this.subTimeID);
-        this.$refs.sub.removeEventListener("mouseup", this.subButtonUpEvent);
+        clearInterval(this.subTimeID)
+        this.$refs.sub.removeEventListener('mouseup', this.subButtonUpEvent)
         this.$refs.sub.removeEventListener(
-          "mouseleave",
+          'mouseleave',
           this.subButtonLeaveEven
-        );
+        )
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

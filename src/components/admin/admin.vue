@@ -85,42 +85,42 @@
 
 <script>
 export default {
-  name: "admin",
+  name: 'admin',
   data() {
     return {
       menuShow: false,
       menuSideWidth: 200,
       title: true,
-      menuIcon: "el-icon-s-fold",
-    };
+      menuIcon: 'el-icon-s-fold'
+    }
   },
   methods: {
     changeMenu() {
-      this.menuShow = !this.menuShow;
+      this.menuShow = !this.menuShow
       if (this.menuSideWidth === 200) {
-        this.menuSideWidth = 64;
-        this.title = false;
-        this.menuIcon = "el-icon-s-unfold";
+        this.menuSideWidth = 64
+        this.title = false
+        this.menuIcon = 'el-icon-s-unfold'
       } else {
-        this.menuSideWidth = 200;
-        this.title = true;
-        this.menuIcon = "el-icon-s-fold";
+        this.menuSideWidth = 200
+        this.title = true
+        this.menuIcon = 'el-icon-s-fold'
       }
     },
     dropdownEven() {
-      console.log("123");
-      this.$router.push("/manageLogin");
+      console.log('123')
+      this.$router.push('/manageLogin')
     },
     userfond() {
-      this.$router.push("/admin/user");
-    },
+      this.$router.push('/admin/user')
+    }
   },
   beforeCreate() {
     if (!this.$store.state.user.nickname) {
-      this.$router.push("/manageLogin");
+      this.$router.push('/manageLogin')
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

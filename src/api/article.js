@@ -52,7 +52,7 @@ export const getUserArticle = (id) => {
 export const getFavour = () => {
   return require({
     method: 'GET',
-    url: '/article/get/favour',
+    url: '/article/get/favour'
   })
 }
 

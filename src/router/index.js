@@ -22,21 +22,18 @@ const routes = [
     component: () => import('../views/article/ArticleModify')
   },
   {
-
     path: '/article/:id',
-    component: () => import('../views/article/index'),
+    component: () => import('../views/article/index')
   },
   {
     path: '/user/personal/center/:id',
     component: () => import('../views/PersonalCenter')
   },
 
-
-
   // 后台
   {
     path: '/admin',
-    redirect: '/admin/user',
+    redirect: '/admin/user'
   },
   {
     path: '/manageLogin',
@@ -49,7 +46,7 @@ const routes = [
       {
         path: '/admin/user',
         component: () => import('../views/admin/user')
-      },
+      }
     ]
   },
   {
@@ -63,7 +60,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
-
 
 export default router

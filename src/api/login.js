@@ -1,4 +1,4 @@
-import require from "../util/js/http";
+import require from '../util/js/http'
 
 export const login = (account, password) => {
   return require({

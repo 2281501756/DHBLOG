@@ -8,8 +8,7 @@ export default new Vuex.Store({
     user: {},
     loginState: false
   },
-  mutations: {
-  },
+  mutations: {},
   actions: {
     set_user(context, user) {
       context.state.user = user
@@ -18,13 +17,12 @@ export default new Vuex.Store({
     logout(context) {
       context.state.user = {}
       context.state.loginState = false
-    },
+    }
   },
   getters: {
     LOGIN_STATE(state) {
       return state.loginState
     }
   },
-  modules: {
-  }
+  modules: {}
 })

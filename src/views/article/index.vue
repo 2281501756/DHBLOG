@@ -105,105 +105,105 @@
 </template>
 
 <script>
-import Watch from "../../layout/body/views/Watch.vue";
-import Header from "../../layout/Header";
-import Footer from "../../layout/Footer.vue";
-import CardVue from "../../layout/body/views/Card.vue";
-import { markdown } from "../../util/js/markdown";
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
-import Clipboard from "clipboard";
-import $ from "jquery";
-import { createDOM } from "../../util/js/create";
-import ImageFill from "../../components/imageFill";
-import { getArticleForID, readNumAdd } from "../../api/article";
-import { getForID } from "../../api/user";
+import Watch from '../../layout/body/views/Watch.vue'
+import Header from '../../layout/Header'
+import Footer from '../../layout/Footer.vue'
+import CardVue from '../../layout/body/views/Card.vue'
+import { markdown } from '../../util/js/markdown'
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+import Clipboard from 'clipboard'
+import $ from 'jquery'
+import { createDOM } from '../../util/js/create'
+import ImageFill from '../../components/imageFill'
+import { getArticleForID, readNumAdd } from '../../api/article'
+import { getForID } from '../../api/user'
 export default {
   data() {
     return {
       articleid: 0,
       articleData: {},
       userData: {},
-      toc: [],
-    };
+      toc: []
+    }
   },
   components: {
     Header,
     Footer,
     Watch,
     CardVue,
-    mavonEditor,
+    mavonEditor
   },
   watch: {
     $route() {
-      this.$destroy(this.$options.name);
-    },
+      this.$destroy(this.$options.name)
+    }
   },
   methods: {
     imageClick(img) {
-      createDOM(ImageFill, { url: img.src });
+      createDOM(ImageFill, { url: img.src })
     },
     scrollToPosition(id) {
-      let position = $(id).offset();
-      position.top = position.top - 80;
-      $("html,body").animate({ scrollTop: position.top }, 500);
-    },
+      let position = $(id).offset()
+      position.top = position.top - 80
+      $('html,body').animate({ scrollTop: position.top }, 500)
+    }
   },
   beforeCreate() {
-    this.articleid = this.$route.params.id;
-    readNumAdd(this.articleid);
+    this.articleid = this.$route.params.id
+    readNumAdd(this.articleid)
     getArticleForID(this.articleid).then((res) => {
-      if (res.data.message === "error") {
-        this.$router.replace("/404");
+      if (res.data.message === 'error') {
+        this.$router.replace('/404')
       }
-      this.articleData = res.data.data[0];
+      this.articleData = res.data.data[0]
       getForID(this.articleData.user_id).then((res2) => {
-        this.userData = res2.data[0];
-        console.log(this.userData);
-      });
-    });
+        this.userData = res2.data[0]
+        console.log(this.userData)
+      })
+    })
   },
   async mounted() {
     this.$nextTick(() => {
-      let clipboard = new Clipboard(".copy-btn");
+      let clipboard = new Clipboard('.copy-btn')
       // 复制成功失败的提示
-      clipboard.on("success", () => {
+      clipboard.on('success', () => {
         this.$message({
-          message: "复制成功",
-          type: "success",
-        });
-      });
-      clipboard.on("error", () => {
-        this.$message.error("失败");
-      });
-    });
+          message: '复制成功',
+          type: 'success'
+        })
+      })
+      clipboard.on('error', () => {
+        this.$message.error('失败')
+      })
+    })
 
     this.articleData.content = markdown(
       mavonEditor,
-      this.articleData.content + ""
-    );
+      this.articleData.content + ''
+    )
 
     this.$nextTick(() => {
       const aArr = $(
-        ".v-note-wrapper .v-note-panel .v-note-navigation-wrapper .v-note-navigation-content  a"
-      ).toArray();
-      let toc = [];
+        '.v-note-wrapper .v-note-panel .v-note-navigation-wrapper .v-note-navigation-content  a'
+      ).toArray()
+      let toc = []
       aArr.forEach((item) => {
-        let href = $(item).attr("id");
-        let name = $(item).parent().text();
-        let label = $(item).parent()[0].nodeName;
+        let href = $(item).attr('id')
+        let name = $(item).parent().text()
+        let label = $(item).parent()[0].nodeName
         if (href) {
           toc.push({
-            href: "#" + href,
+            href: '#' + href,
             name: name,
-            label: label,
-          });
+            label: label
+          })
         }
-      });
-      this.toc = toc;
-    });
-  },
-};
+      })
+      this.toc = toc
+    })
+  }
+}
 </script>
 
 <style scoped>

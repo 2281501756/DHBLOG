@@ -79,109 +79,109 @@
 </template>
 
 <script>
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
-import axios from "../../util/js/http/index";
-import NavVue from "../../layout/body/views/Nav.vue";
-import { createDOM } from "../../util/js/create";
-import ImageFill from "@/components/imageFill";
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+import axios from '../../util/js/http/index'
+import NavVue from '../../layout/body/views/Nav.vue'
+import { createDOM } from '../../util/js/create'
+import ImageFill from '@/components/imageFill'
 export default {
   data() {
     return {
       imgList: [
         {
-          value: `${this.$base_url}/static/image/articleImage/1.jpg`,
+          value: `${this.$base_url}/static/image/articleImage/1.jpg`
         },
         {
-          value: `${this.$base_url}/static/image/articleImage/2.jpg`,
+          value: `${this.$base_url}/static/image/articleImage/2.jpg`
         },
         {
-          value: `${this.$base_url}/static/image/articleImage/3.jpg`,
+          value: `${this.$base_url}/static/image/articleImage/3.jpg`
         },
         {
-          value: `${this.$base_url}/static/image/articleImage/4.jpg`,
+          value: `${this.$base_url}/static/image/articleImage/4.jpg`
         },
         {
-          value: `${this.$base_url}/static/image/articleImage/5.jpg`,
+          value: `${this.$base_url}/static/image/articleImage/5.jpg`
         },
         {
-          value: `${this.$base_url}/static/image/articleImage/6.jpg`,
-        },
+          value: `${this.$base_url}/static/image/articleImage/6.jpg`
+        }
       ],
       formdata: {
         userID: this.$store.state.user.id,
         author: this.$store.state.user.nickname,
-        title: "",
-        description: "",
-        content: "",
-        label: "前端",
-        photo: `${this.$base_url}/static/image/articleImage/1.jpg`,
+        title: '',
+        description: '',
+        content: '',
+        label: '前端',
+        photo: `${this.$base_url}/static/image/articleImage/1.jpg`
       },
-      selected: "前端",
+      selected: '前端',
       options: [
-        { text: "前端", value: "前端" },
-        { text: "后端", value: "后端" },
-        { text: "css", value: "css" },
-        { text: "js", value: "js" },
-        { text: "ts", value: "ts" },
-        { text: "vue", value: "vue" },
-        { text: "react", value: "react" },
-      ],
-    };
+        { text: '前端', value: '前端' },
+        { text: '后端', value: '后端' },
+        { text: 'css', value: 'css' },
+        { text: 'js', value: 'js' },
+        { text: 'ts', value: 'ts' },
+        { text: 'vue', value: 'vue' },
+        { text: 'react', value: 'react' }
+      ]
+    }
   },
   watch: {
     selected(newValue) {
-      this.formdata.label = newValue;
-    },
+      this.formdata.label = newValue
+    }
   },
   components: {
     mavonEditor,
-    NavVue,
+    NavVue
   },
   methods: {
     $imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
-      var formdata = new FormData();
-      formdata.append("file", $file);
+      var formdata = new FormData()
+      formdata.append('file', $file)
       axios({
-        url: "/upload",
-        method: "post",
+        url: '/upload',
+        method: 'post',
         data: formdata,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { 'Content-Type': 'multipart/form-data' }
       }).then((res) => {
-        this.$refs.md.$img2Url(pos, `${this.$base_url + res.data.url}`);
-      });
+        this.$refs.md.$img2Url(pos, `${this.$base_url + res.data.url}`)
+      })
     },
     up() {
-      let file = this.$refs.file.files[0];
-      let data = new FormData();
-      data.append("file", file);
-      axios.post("/upload", data, {}).then((res) => {
-        this.formdata.photo = `${this.$base_url + res.data.url}`;
-      });
+      let file = this.$refs.file.files[0]
+      let data = new FormData()
+      data.append('file', file)
+      axios.post('/upload', data, {}).then((res) => {
+        this.formdata.photo = `${this.$base_url + res.data.url}`
+      })
     },
     submit() {
-      if (this.formdata.title === "") {
-        this.$message.error("标题不能为空");
-        return;
+      if (this.formdata.title === '') {
+        this.$message.error('标题不能为空')
+        return
       }
-      this.$post("/article/add", this.formdata).then((res) => {
-        if (res.data.message === "succeed")
+      this.$post('/article/add', this.formdata).then((res) => {
+        if (res.data.message === 'succeed')
           this.$message({
-            message: "提交成功",
-            type: "success",
-          });
-        else this.$message.error("error 出错了😱");
-      });
+            message: '提交成功',
+            type: 'success'
+          })
+        else this.$message.error('error 出错了😱')
+      })
     },
     imgListClick(value) {
-      this.formdata.photo = value;
+      this.formdata.photo = value
     },
     craeteImg() {
-      createDOM(ImageFill, { url: this.formdata.photo });
-    },
-  },
-};
+      createDOM(ImageFill, { url: this.formdata.photo })
+    }
+  }
+}
 </script>
 
 <style scoped>

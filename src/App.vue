@@ -11,9 +11,9 @@
 <script>
 export default {
   mounted() {
-    document.querySelector("#loading").remove();
-  },
-};
+    document.querySelector('#loading').remove()
+  }
+}
 </script>
 <style>
 * {

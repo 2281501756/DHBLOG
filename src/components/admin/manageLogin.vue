@@ -26,30 +26,30 @@
 export default {
   data() {
     return {
-      account: "",
-      password: "",
-    };
+      account: '',
+      password: ''
+    }
   },
   methods: {
     async login() {
       let Response = await this.$get(
         `/admin/superlogin?account=${this.account}&password=${this.password}`
-      );
-      let data = Response.data;
-      if (data.result === "error") {
-        this.$message.error("账号密码错误, 请输入正确的管理员信息");
-        return;
+      )
+      let data = Response.data
+      if (data.result === 'error') {
+        this.$message.error('账号密码错误, 请输入正确的管理员信息')
+        return
       } else {
         this.$message({
-          message: "登录成功！",
-          type: "success",
-        });
+          message: '登录成功！',
+          type: 'success'
+        })
         this.$store.state.user = data.user
-        this.$router.push("/admin");
+        this.$router.push('/admin')
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

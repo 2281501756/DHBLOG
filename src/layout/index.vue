@@ -7,7 +7,7 @@
         '能原谅女人谎言的才是真正的男人。——《海贼王》',
         '正因为我们看不见，那才可怕。黑崎一护——《死神》',
         '伴随着这种世袭制度，人类的错误历史也将不断重演。——灰原哀',
-        '要是喜欢一个人，就要连那个人脏的地方一起喜欢。坂田银时——《银魂》',
+        '要是喜欢一个人，就要连那个人脏的地方一起喜欢。坂田银时——《银魂》'
       ]"
     />
     <Body />
@@ -16,13 +16,12 @@
 </template>
 
 <script>
-import Header from "./Header.vue";
-import Body from "./body";
-import Footer from "./Footer.vue";
+import Header from './Header.vue'
+import Body from './body'
+import Footer from './Footer.vue'
 export default {
-  components: { Header, Body, Footer },
-};
+  components: { Header, Body, Footer }
+}
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

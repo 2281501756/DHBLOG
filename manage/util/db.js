@@ -1,10 +1,10 @@
-const mysql = require('mysql');
+const mysql = require('mysql')
 const config = {
   host: 'localhost',
   post: '3306',
   user: 'root',
   password: 'root',
-  database: 'blog',
+  database: 'blog'
 }
 
 module.exports = {

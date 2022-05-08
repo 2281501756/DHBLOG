@@ -37,42 +37,42 @@ export default {
       imageActive: 1,
       talkIndex: 1,
       intervalID1: 0,
-      intervalID2: 0,
-    };
+      intervalID2: 0
+    }
   },
-  props: ["talkData", "title"],
+  props: ['talkData', 'title'],
   mounted() {
     if (this.talkData) {
       this.intervalID1 = setInterval(() => {
-        this.talkIndex = (this.talkIndex + 1) % this.talkData.length;
-      }, 5000);
+        this.talkIndex = (this.talkIndex + 1) % this.talkData.length
+      }, 5000)
     }
 
     //轮播图动画
-    let img = document.querySelectorAll(".header-image");
+    let img = document.querySelectorAll('.header-image')
     this.intervalID2 = setInterval(() => {
       if (this.imageActive === 1) {
-        img[1].style.opacity = 0;
-        img[0].style.opacity = 100;
+        img[1].style.opacity = 0
+        img[0].style.opacity = 100
         setTimeout(() => {
-          this.imageURL2 = Math.floor(Math.random() * 14 + 1);
-        }, 2000);
-        this.imageActive = 0;
+          this.imageURL2 = Math.floor(Math.random() * 14 + 1)
+        }, 2000)
+        this.imageActive = 0
       } else {
-        img[1].style.opacity = 100;
-        img[0].style.opacity = 0;
+        img[1].style.opacity = 100
+        img[0].style.opacity = 0
         setTimeout(() => {
-          this.imageURL1 = Math.floor(Math.random() * 14 + 1);
-        }, 2000);
-        this.imageActive = 1;
+          this.imageURL1 = Math.floor(Math.random() * 14 + 1)
+        }, 2000)
+        this.imageActive = 1
       }
-    }, 8000);
+    }, 8000)
   },
   destroyed() {
-    clearInterval(this.intervalID1);
-    clearInterval(this.intervalID2);
-  },
-};
+    clearInterval(this.intervalID1)
+    clearInterval(this.intervalID2)
+  }
+}
 </script>
 
 <style scoped>

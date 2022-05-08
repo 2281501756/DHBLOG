@@ -7,5 +7,4 @@ router.get('/get/for/id', userController.getForID)
 router.post('/create', userController.create)
 router.get('/judge/account', userController.judge_account)
 
-
 module.exports = router

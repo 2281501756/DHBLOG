@@ -14,50 +14,50 @@ export default {
   data() {
     return {
       classList: [
-        "pattern-zigzag-sm",
-        "pattern-dots-sm",
-        "pattern-horizontal-lines-lg",
-        "pattern-triangles-lg",
-        "pattern-zigzag-sm",
-        "	pattern-zigzag-xl",
-        "	pattern-dots-xl",
-        "	pattern-vertical-lines-xl",
-        "pattern-vertical-stripes-sm",
-        "pattern-vertical-lines-lg",
-        "	pattern-cross-dots-lg",
-        "pattern-grid-sm",
-        "pattern-checks-sm",
-        "pattern-vertical-lines-md",
-        "	pattern-triangles-lg",
-        "pattern-checks-xl",
-        "pattern-vertical-lines-sm",
+        'pattern-zigzag-sm',
+        'pattern-dots-sm',
+        'pattern-horizontal-lines-lg',
+        'pattern-triangles-lg',
+        'pattern-zigzag-sm',
+        '	pattern-zigzag-xl',
+        '	pattern-dots-xl',
+        '	pattern-vertical-lines-xl',
+        'pattern-vertical-stripes-sm',
+        'pattern-vertical-lines-lg',
+        '	pattern-cross-dots-lg',
+        'pattern-grid-sm',
+        'pattern-checks-sm',
+        'pattern-vertical-lines-md',
+        '	pattern-triangles-lg',
+        'pattern-checks-xl',
+        'pattern-vertical-lines-sm'
       ],
-      classindex: 0,
-    };
+      classindex: 0
+    }
   },
   mounted() {
-    let classname = localStorage.getItem("footerClass");
-    this.$refs.root.class = "";
-    this.$refs.root.setAttribute("class", classname);
-    this.$refs.root.style.color = localStorage.getItem("footerColor");
-    this.$refs.color.value = localStorage.getItem("footerColor");
+    let classname = localStorage.getItem('footerClass')
+    this.$refs.root.class = ''
+    this.$refs.root.setAttribute('class', classname)
+    this.$refs.root.style.color = localStorage.getItem('footerColor')
+    this.$refs.color.value = localStorage.getItem('footerColor')
   },
   methods: {
     buttonClick() {
-      this.$refs.root.removeAttribute("class");
-      this.classindex = (this.classindex + 1) % this.classList.length;
-      let classname = this.classList[this.classindex];
-      this.$refs.root.class = "";
-      this.$refs.root.setAttribute("class", classname);
-      localStorage.setItem("footerClass", classname);
+      this.$refs.root.removeAttribute('class')
+      this.classindex = (this.classindex + 1) % this.classList.length
+      let classname = this.classList[this.classindex]
+      this.$refs.root.class = ''
+      this.$refs.root.setAttribute('class', classname)
+      localStorage.setItem('footerClass', classname)
     },
     inputchange() {
-      console.log(this.$refs.color.value);
-      this.$refs.root.style.color = this.$refs.color.value;
-      localStorage.setItem("footerColor", this.$refs.color.value);
-    },
-  },
-};
+      console.log(this.$refs.color.value)
+      this.$refs.root.style.color = this.$refs.color.value
+      localStorage.setItem('footerColor', this.$refs.color.value)
+    }
+  }
+}
 </script>
 
 <style scoped>

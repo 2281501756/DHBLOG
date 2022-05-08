@@ -31,22 +31,22 @@
 </template>
 
 <script>
-import Watch from "./Watch.vue";
-import { totalData } from "../../../api/totalData";
+import Watch from './Watch.vue'
+import { totalData } from '../../../api/totalData'
 export default {
   data() {
     return {
-      total: {},
-    };
+      total: {}
+    }
   },
   components: {
-    Watch,
+    Watch
   },
   async mounted() {
-    let res = (await totalData()).data;
-    this.total = res.data;
-  },
-};
+    let res = (await totalData()).data
+    this.total = res.data
+  }
+}
 </script>
 
 <style scoped>

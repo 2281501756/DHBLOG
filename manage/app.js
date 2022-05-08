@@ -8,16 +8,17 @@ const uploadRouter = require('./routes/upload')
 const adminRouter = require('./routes/admin')
 const acticleRouter = require('./routes/article')
 const userRouter = require('./routes/user')
-const crypto = require('crypto')
 const port = 3000
 const app = express()
 app.use(cors())
 app.use(cookieParser())
-app.use(cookieSession({
-  name: '', 
-  keys: ['QWEQWEQWEQEQW'],
-  maxAge: 1000 * 60 * 60 //保存时间
-}))
+app.use(
+  cookieSession({
+    name: '',
+    keys: ['QWEQWEQWEQEQW'],
+    maxAge: 1000 * 60 * 60 //保存时间
+  })
+)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 

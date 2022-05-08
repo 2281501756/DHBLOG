@@ -8,15 +8,15 @@
 </template>
 
 <script>
-import Nav from "./body/views/Nav.vue";
-import SlideShow from "./body/views/SlideShow.vue";
+import Nav from './body/views/Nav.vue'
+import SlideShow from './body/views/SlideShow.vue'
 export default {
   components: {
     Nav,
-    SlideShow,
+    SlideShow
   },
-  props: ["talkData", "title"],
-};
+  props: ['talkData', 'title']
+}
 </script>
 
 <style scoped>

@@ -181,129 +181,129 @@
 </template>
 
 <script>
-import { login } from "../api/login";
-import { set_token } from "../util/js/token";
-import store from "../store";
-import { judge_account } from "../api/user";
-import { sendEmailCode, acceptEmailCode, userCreate } from "../api/register";
+import { login } from '../api/login'
+import { set_token } from '../util/js/token'
+import store from '../store'
+import { judge_account } from '../api/user'
+import { sendEmailCode, acceptEmailCode, userCreate } from '../api/register'
 export default {
   data() {
     return {
       buttonShow: true,
       loginStatus: this.LoginStatus,
-      register_animation: "left",
+      register_animation: 'left',
       formData_login: {
-        account: "",
-        password: "",
+        account: '',
+        password: ''
       },
       formData_register: {
-        account: "",
-        password: "",
-        repassword: "",
-        email: "",
-        auth_code: "",
-        nickname: "",
-        description: "",
+        account: '',
+        password: '',
+        repassword: '',
+        email: '',
+        auth_code: '',
+        nickname: '',
+        description: ''
       },
-      register_index: 0,
-    };
+      register_index: 0
+    }
   },
-  props: ["LoginStatus"],
+  props: ['LoginStatus'],
   methods: {
     submit() {
       login(this.formData_login.account, this.formData_login.password).then(
         (res) => {
-          let data = res.data;
-          if (data.message === "succeed") {
-            store.dispatch("set_user", data.data);
-            set_token(data.token);
-            this.hide();
+          let data = res.data
+          if (data.message === 'succeed') {
+            store.dispatch('set_user', data.data)
+            set_token(data.token)
+            this.hide()
             this.$message({
-              message: "登入成功！",
-              type: "success",
-            });
+              message: '登入成功！',
+              type: 'success'
+            })
           } else {
-            this.$message.error("错误请输入正确的账号密码");
+            this.$message.error('错误请输入正确的账号密码')
           }
         }
-      );
+      )
     },
     hide() {
-      this.$el.parentNode.removeChild(this.$el);
-      this.$destroy();
+      this.$el.parentNode.removeChild(this.$el)
+      this.$destroy()
     },
     buttonAnimation() {
-      this.buttonShow = false;
+      this.buttonShow = false
       setTimeout(() => {
-        this.buttonShow = true;
-      }, 1000);
+        this.buttonShow = true
+      }, 1000)
     },
     register_last_step() {
-      this.buttonAnimation();
-      this.register_animation = "right";
+      this.buttonAnimation()
+      this.register_animation = 'right'
       setTimeout(() => {
-        this.register_index--;
-      }, 100);
+        this.register_index--
+      }, 100)
     },
     async register_next_step() {
       if (this.register_index === 0) {
-        let data = await judge_account(this.formData_register.account);
-        data = data.data[0].count;
+        let data = await judge_account(this.formData_register.account)
+        data = data.data[0].count
         if (data !== 0) {
           this.$message({
-            type: "warning",
-            message: "用户名已经存在, 请换一个亲😘",
-          });
-          return;
+            type: 'warning',
+            message: '用户名已经存在, 请换一个亲😘'
+          })
+          return
         }
         if (
           this.formData_register.password !== this.formData_register.repassword
         ) {
           this.$message({
-            type: "error",
-            message: "两次输入的密码不正确",
-          });
-          return;
+            type: 'error',
+            message: '两次输入的密码不正确'
+          })
+          return
         }
       }
-      this.buttonAnimation();
-      this.register_animation = "left";
+      this.buttonAnimation()
+      this.register_animation = 'left'
       setTimeout(() => {
-        this.register_index++;
-      }, 100);
+        this.register_index++
+      }, 100)
     },
     getEmailCode() {
       sendEmailCode(this.formData_register.email).then((res) => {
-        let data = res.data;
-        if (data.message === "succeed") {
+        let data = res.data
+        if (data.message === 'succeed') {
           this.$message({
-            type: "success",
-            message: "发送成功，请检查您的邮箱",
-          });
-        } else if (data.message === "repetition") {
+            type: 'success',
+            message: '发送成功，请检查您的邮箱'
+          })
+        } else if (data.message === 'repetition') {
           this.$message({
-            type: "error",
-            message: "发送过邮件啦",
-          });
+            type: 'error',
+            message: '发送过邮件啦'
+          })
         } else {
           this.$message({
-            type: "error",
-            message: "出错了",
-          });
+            type: 'error',
+            message: '出错了'
+          })
         }
-      });
+      })
     },
     async register() {
       const acceptData = await acceptEmailCode(
         this.formData_register.email,
         this.formData_register.auth_code
-      );
-      if (acceptData.data.message === "error") {
+      )
+      if (acceptData.data.message === 'error') {
         this.$message({
-          type: "error",
-          message: "验证码不正确",
-        });
-        return;
+          type: 'error',
+          message: '验证码不正确'
+        })
+        return
       }
       const data = await userCreate(
         this.formData_register.account,
@@ -311,20 +311,20 @@ export default {
         this.formData_register.nickname,
         this.formData_register.email,
         this.formData_register.description
-      );
-      if (data.data.message === "succeed") {
-        this.formData_login.account = this.formData_register.account;
-        this.formData_login.password = this.formData_register.password;
-        this.submit();
+      )
+      if (data.data.message === 'succeed') {
+        this.formData_login.account = this.formData_register.account
+        this.formData_login.password = this.formData_register.password
+        this.submit()
       } else {
         this.$message({
-          type: "error",
-          message: "注册失败",
-        });
+          type: 'error',
+          message: '注册失败'
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -469,7 +469,7 @@ button:active {
   top: 7.5%;
   left: 50%;
   position: absolute;
-  background: url("../assets/images/login.jpg") center/cover;
+  background: url('../assets/images/login.jpg') center/cover;
   background-position: 50% 50%;
   display: flex;
   justify-content: center;

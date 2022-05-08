@@ -20,23 +20,23 @@
       <i class="el-icon-user"></i> {{ articleData.author }}&nbsp;&nbsp;
       <i class="el-icon-date"></i>{{ articleData.create_time }}&nbsp;&nbsp;
       <i class="el-icon-chat-line-round"></i>
-      {{ articleData.comment + "条评论 " }} &nbsp;&nbsp;<i
+      {{ articleData.comment + '条评论 ' }} &nbsp;&nbsp;<i
         class="el-icon-view"
       ></i>
-      {{ articleData.readnum + "阅读量" }}
+      {{ articleData.readnum + '阅读量' }}
     </footer>
   </router-link>
 </template>
 
 <script>
 export default {
-  props: ["articleData"],
+  props: ['articleData'],
   data() {
     return {
-      isloading: true,
-    };
-  },
-};
+      isloading: true
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -126,7 +126,7 @@ img {
   margin-bottom: 10px;
 }
 .loading-container::before {
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   position: absolute;
@@ -139,7 +139,7 @@ img {
   filter: blur(10px);
 }
 .loading-container::after {
-  content: "";
+  content: '';
   width: calc(100% - 10px);
   height: calc(100% - 10px);
   position: absolute;

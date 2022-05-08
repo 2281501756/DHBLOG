@@ -2,8 +2,8 @@ import require from '../util/js/http/index'
 
 export const sendEmailCode = (email) => {
   return require({
-    method: "GET",
-    url: "/send/email/code",
+    method: 'GET',
+    url: '/send/email/code',
     params: {
       email: email
     }

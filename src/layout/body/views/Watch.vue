@@ -2,7 +2,7 @@
   <div
     class="watch"
     :style="{
-      background: `url(${this.$base_url}/static/image/background/7.jpg) no-repeat center/cover`,
+      background: `url(${this.$base_url}/static/image/background/7.jpg) no-repeat center/cover`
     }"
   >
     <div class="num">
@@ -27,40 +27,40 @@ export default {
     return {
       hours: 0,
       minutes: 0,
-      seconds: 0,
-    };
+      seconds: 0
+    }
   },
   mounted() {
-    let date = new Date();
-    this.hours = date.getHours();
-    this.minutes = date.getMinutes();
-    this.seconds = date.getSeconds();
-    if (this.hours < 10) this.hours = "0" + this.hours;
-    if (this.minutes < 10) this.minutes = "0" + this.minutes;
-    if (this.seconds < 10) this.seconds = "0" + this.seconds;
+    let date = new Date()
+    this.hours = date.getHours()
+    this.minutes = date.getMinutes()
+    this.seconds = date.getSeconds()
+    if (this.hours < 10) this.hours = '0' + this.hours
+    if (this.minutes < 10) this.minutes = '0' + this.minutes
+    if (this.seconds < 10) this.seconds = '0' + this.seconds
     setInterval(() => {
-      this.seconds = parseInt(this.seconds);
-      this.minutes = parseInt(this.minutes);
-      this.hours = parseInt(this.hours);
-      this.seconds += 1;
+      this.seconds = parseInt(this.seconds)
+      this.minutes = parseInt(this.minutes)
+      this.hours = parseInt(this.hours)
+      this.seconds += 1
       if (this.seconds % 60 === 0) {
-        this.seconds = 0;
-        this.minutes += 1;
+        this.seconds = 0
+        this.minutes += 1
         if (this.minutes % 60 === 0) {
-          this.minutes = 0;
-          this.hours += 1;
+          this.minutes = 0
+          this.hours += 1
           if (this.hours % 24 === 0) {
-            this.hours = 0;
+            this.hours = 0
           }
         }
       }
 
-      if (this.hours < 10) this.hours = "0" + this.hours;
-      if (this.minutes < 10) this.minutes = "0" + this.minutes;
-      if (this.seconds < 10) this.seconds = "0" + this.seconds;
-    }, 1000);
-  },
-};
+      if (this.hours < 10) this.hours = '0' + this.hours
+      if (this.minutes < 10) this.minutes = '0' + this.minutes
+      if (this.seconds < 10) this.seconds = '0' + this.seconds
+    }, 1000)
+  }
+}
 </script>
 
 <style scoped>

@@ -10,14 +10,14 @@
 <script>
 export default {
   data() {
-    return {};
+    return {}
   },
-  props: ["title", "height", "width"],
+  props: ['title', 'height', 'width'],
   mounted() {
-    this.$refs.root.style.height = this.height;
-    this.$refs.root.style.width = this.width;
-  },
-};
+    this.$refs.root.style.height = this.height
+    this.$refs.root.style.width = this.width
+  }
+}
 </script>
 
 <style scoped>
@@ -43,7 +43,7 @@ export default {
   margin-bottom: 20px;
 }
 .head::after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   bottom: -1px;

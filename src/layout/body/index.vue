@@ -66,7 +66,7 @@
                 font-weight: 800;
               "
             >
-              {{ this.$store.state.user.nickname || "未登录" }}
+              {{ this.$store.state.user.nickname || '未登录' }}
             </div>
             <p
               style="
@@ -76,7 +76,7 @@
                 padding: 0 20px;
               "
             >
-              {{ this.$store.state.user.description || "" }}
+              {{ this.$store.state.user.description || '' }}
             </p>
           </div>
           <a href="#"
@@ -168,11 +168,11 @@
 </template>
 
 <script>
-import ArticleCard from "./views/ArticleCard.vue";
-import Introduce from "./views/Introduce.vue";
-import Card from "./views/Card.vue";
-import Label from "./views/Label.vue";
-import { getArticle, getFavour } from "../../api/article";
+import ArticleCard from './views/ArticleCard.vue'
+import Introduce from './views/Introduce.vue'
+import Card from './views/Card.vue'
+import Label from './views/Label.vue'
+import { getArticle, getFavour } from '../../api/article'
 export default {
   data() {
     return {
@@ -182,76 +182,76 @@ export default {
       serveBookDataNumber: 100,
       favourArticle: {},
       isLoading: false,
-      totalData: {},
-    };
+      totalData: {}
+    }
   },
   methods: {
     favLink(id) {
-      this.$router.push("/article/" + id);
+      this.$router.push('/article/' + id)
     },
     getBookData() {
       getArticle(this.bookDataNumberNow, this.bookDataPageSize).then((res) => {
-        res = res.data;
-        if (res.message === "error") {
+        res = res.data
+        if (res.message === 'error') {
           this.$message({
-            type: "error",
-            message: "服务器出错了😭",
-          });
-          return;
+            type: 'error',
+            message: '服务器出错了😭'
+          })
+          return
         }
-        this.serveBookDataNumber = res.sum;
-        this.bookData = [...this.bookData, ...res.data];
-        this.bookDataNumberNow += this.bookDataPageSize;
-        this.isLoading = false;
-      });
+        this.serveBookDataNumber = res.sum
+        this.bookData = [...this.bookData, ...res.data]
+        this.bookDataNumberNow += this.bookDataPageSize
+        this.isLoading = false
+      })
     },
     scrollfunction() {
       let scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop; // 滚动条距离顶部的距离
+        document.documentElement.scrollTop || document.body.scrollTop // 滚动条距离顶部的距离
       let windowHeight =
-        document.documentElement.clientHeight || document.body.clientHeight; // 可视区的高度
+        document.documentElement.clientHeight || document.body.clientHeight // 可视区的高度
       let scrollHeight =
-        document.documentElement.scrollHeight || document.body.scrollHeight; //dom元素的高度，包含溢出不可见的内容
+        document.documentElement.scrollHeight || document.body.scrollHeight //dom元素的高度，包含溢出不可见的内容
       // console.log(scrollHeight + "    " + scrollTop + "    " + windowHeight);
       if (scrollHeight <= scrollTop + windowHeight + 1 && !this.isLoading) {
         if (this.bookDataNumberNow >= this.serveBookDataNumber) {
-          window.removeEventListener("scroll", this.scrollfunction);
-          return;
+          window.removeEventListener('scroll', this.scrollfunction)
+          return
         }
-        this.isLoading = true;
-        console.log("获取数据");
+        this.isLoading = true
+        console.log('获取数据')
         setTimeout(() => {
-          this.getBookData();
-        }, 1000);
+          this.getBookData()
+        }, 1000)
       }
     },
     imageClick() {
       if (!this.$store.state.loginState) {
         this.$message({
-          type: "warning",
-          message: "登入后进入个人首页",
-        });
-        return;
+          type: 'warning',
+          message: '登入后进入个人首页'
+        })
+        return
       }
-      this.$router.push(`/user/personal/center/${this.$store.state.user.id}`);
-    },
+      this.$router.push(`/user/personal/center/${this.$store.state.user.id}`)
+    }
   },
   mounted() {
-    window.addEventListener("scroll", this.scrollfunction);
+    window.addEventListener('scroll', this.scrollfunction)
   },
   created() {
-    this.getBookData();
+    this.getBookData()
     getFavour().then((res) => {
-      this.favourArticle = res.data;
-    });
+      this.favourArticle = res.data
+    })
   },
   components: {
     ArticleCard,
     Introduce,
     Card,
-    Label,
-  },
-};
+    Label
+  }
+}
 </script>
 
 <style scoped>
@@ -273,7 +273,7 @@ export default {
   width: 25%;
 }
 .body:after {
-  content: "";
+  content: '';
   height: 0;
   clear: both;
   overflow: hidden;
@@ -299,7 +299,7 @@ export default {
   margin-bottom: 10px;
 }
 .loading-container::before {
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   position: absolute;
@@ -312,7 +312,7 @@ export default {
   filter: blur(30px);
 }
 .loading-container::after {
-  content: "";
+  content: '';
   width: calc(100% - 5px);
   height: calc(100% - 5px);
   position: absolute;

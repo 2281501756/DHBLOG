@@ -11,11 +11,11 @@
         <span> <i class="el-icon-date"></i>{{ article.create_time }} </span>
         <span>
           <i class="el-icon-view"></i>
-          {{ article.readnum + "阅读量" }}
+          {{ article.readnum + '阅读量' }}
         </span>
         <span>
           <i class="el-icon-chat-line-round"></i>
-          {{ article.comment + "条评论 " }}
+          {{ article.comment + '条评论 ' }}
         </span>
       </div>
     </div>
@@ -38,49 +38,49 @@
 </template>
 
 <script>
-import { articleDelete } from "../../api/article";
+import { articleDelete } from '../../api/article'
 export default {
-  props: ["article"],
+  props: ['article'],
   data() {
     return {
-      text: 0,
-    };
+      text: 0
+    }
   },
   methods: {
     openArticle() {
-      this.$router.push("/article/" + this.article.id);
+      this.$router.push('/article/' + this.article.id)
     },
     openArticleModify() {
-      this.$router.push("/article/modify/" + this.article.id);
+      this.$router.push('/article/modify/' + this.article.id)
     },
     deleteArticle() {
       articleDelete(this.article.id).then((res) => {
-        console.log(res);
-        if (res.data.message === "succeed") {
+        console.log(res)
+        if (res.data.message === 'succeed') {
           this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
-          this.$el.parentNode.removeChild(this.$el);
-          this.$destroy(this.$options.name);
+            type: 'success',
+            message: '删除成功!'
+          })
+          this.$el.parentNode.removeChild(this.$el)
+          this.$destroy(this.$options.name)
         }
-      });
+      })
     },
     open() {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
-          this.deleteArticle();
+          this.deleteArticle()
         })
         .catch(() => {
-          console.log("取消");
-        });
-    },
-  },
-};
+          console.log('取消')
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

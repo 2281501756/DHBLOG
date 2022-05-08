@@ -60,145 +60,136 @@
 </template>
 
 <script>
-import { delete_token } from "../../../util/js/token";
-import LoginVue from "../../../views/Login.vue";
-import { createDOM } from "../../../util/js/create";
+import { delete_token } from '../../../util/js/token'
+import LoginVue from '../../../views/Login.vue'
+import { createDOM } from '../../../util/js/create'
 export default {
   data() {
     return {
       userCardShow: false,
       outImg: false,
-      outCard: true,
-    };
+      outCard: true
+    }
   },
   methods: {
     showLogin(flag) {
-      createDOM(LoginVue, { LoginStatus: flag });
+      createDOM(LoginVue, { LoginStatus: flag })
     },
     routerPush(url) {
-      if (url === "/user/personal/center/") url += this.$store.state.user.id;
-      if (this.$route.path !== url) this.$router.push(url);
+      if (url === '/user/personal/center/') url += this.$store.state.user.id
+      if (this.$route.path !== url) this.$router.push(url)
       else {
         this.$message({
           showClose: true,
-          message: "你已经在这个界面了，请不要再次跳转",
-          type: "error",
-          duration: 1000,
-        });
-        return;
+          message: '你已经在这个界面了，请不要再次跳转',
+          type: 'error',
+          duration: 1000
+        })
+        return
       }
     },
     imgMouseover() {
       if (!this.userCardShow) {
-        this.userCardAddAction();
-        this.userCardShow = true;
+        this.userCardAddAction()
+        this.userCardShow = true
       } else {
-        this.outImg = false;
+        this.outImg = false
       }
     },
     imgMouseout() {
-      this.outImg = true;
+      this.outImg = true
     },
     userCardMouseenter() {
-      this.outCard = false;
+      this.outCard = false
     },
     userCardMouseout() {
-      this.outCard = true;
+      this.outCard = true
     },
     userCardAddAction() {
-      this.$refs.nav_user_photo.classList.add("action");
-      this.$refs.user_card.classList.add("action");
-      this.$refs.nav_user_photo.addEventListener(
-        "mouseleave",
-        this.imgMouseout
-      );
+      this.$refs.nav_user_photo.classList.add('action')
+      this.$refs.user_card.classList.add('action')
+      this.$refs.nav_user_photo.addEventListener('mouseleave', this.imgMouseout)
       this.$refs.user_card.addEventListener(
-        "mouseover",
+        'mouseover',
         this.userCardMouseenter
-      );
-      this.$refs.user_card.addEventListener(
-        "mouseleave",
-        this.userCardMouseout
-      );
-      requestAnimationFrame(this.animationCallback);
+      )
+      this.$refs.user_card.addEventListener('mouseleave', this.userCardMouseout)
+      requestAnimationFrame(this.animationCallback)
     },
     userCardDeleteAction() {
-      this.outImg = false;
-      this.outCard = true;
-      this.$refs.nav_user_photo.classList.remove("action");
-      this.$refs.user_card.classList.remove("action");
+      this.outImg = false
+      this.outCard = true
+      this.$refs.nav_user_photo.classList.remove('action')
+      this.$refs.user_card.classList.remove('action')
       this.$refs.nav_user_photo.removeEventListener(
-        "mouseleave",
+        'mouseleave',
         this.imgMouseout
-      );
+      )
       this.$refs.user_card.removeEventListener(
-        "Mouseleave ",
+        'Mouseleave ',
         this.userCardMouseout
-      );
+      )
       this.$refs.user_card.removeEventListener(
-        "mouseover",
+        'mouseover',
         this.userCardMouseenter
-      );
-      this.userCardShow = false;
+      )
+      this.userCardShow = false
     },
     animationCallback() {
-      if (this.outImg && this.outCard) this.userCardDeleteAction();
-      else requestAnimationFrame(this.animationCallback);
+      if (this.outImg && this.outCard) this.userCardDeleteAction()
+      else requestAnimationFrame(this.animationCallback)
     },
     logout() {
       this.$refs.nav_user_photo.removeEventListener(
-        "mouseover",
+        'mouseover',
         this.imgMouseover
-      );
-      this.userCardDeleteAction();
-      this.$store.dispatch("logout");
-      if (this.$route.path !== "/") {
-        this.$router.push("/");
+      )
+      this.userCardDeleteAction()
+      this.$store.dispatch('logout')
+      if (this.$route.path !== '/') {
+        this.$router.push('/')
       }
-      delete_token();
-      location.reload();
-    },
+      delete_token()
+      location.reload()
+    }
   },
   mounted() {
     window.onscroll = function () {
-      let top = document.documentElement.scrollTop;
-      let nav = document.querySelector(".nav");
+      let top = document.documentElement.scrollTop
+      let nav = document.querySelector('.nav')
       if (top > 300) {
-        nav.classList.add("nav-active");
+        nav.classList.add('nav-active')
       } else {
-        nav.classList.remove("nav-active");
+        nav.classList.remove('nav-active')
       }
-    };
+    }
     if (this.$store.state.loginState)
-      this.$refs.nav_user_photo.addEventListener(
-        "mouseover",
-        this.imgMouseover
-      );
+      this.$refs.nav_user_photo.addEventListener('mouseover', this.imgMouseover)
   },
   computed: {
     loginStatus() {
-      return this.$store.state.loginState;
-    },
+      return this.$store.state.loginState
+    }
   },
   watch: {
     $route: {
       immediate: true, // 一旦监听到路由的变化立即执行
       handler() {
-        this.$destroy(this.$options.name);
-      },
+        this.$destroy(this.$options.name)
+      }
     },
     loginStatus(newValue) {
       if (newValue) {
         this.$nextTick(() => {
           this.$refs.nav_user_photo.addEventListener(
-            "mouseover",
+            'mouseover',
             this.imgMouseover
-          );
-        });
+          )
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
