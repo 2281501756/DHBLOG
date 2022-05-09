@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: '/user/personal/center/:id',
-    component: () => import('../views/PersonalCenter')
+    component: () => import('../views/personalCenter/PersonalCenter')
   },
 
   // 后台

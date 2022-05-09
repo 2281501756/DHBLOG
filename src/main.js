@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'nprogress/nprogress.css'
 import animated from 'animate.css' // npm install animate.css --save安装，在引入
+import AsyncComputed from 'vue-async-computed'
 
 import './util/css/reset.css'
 import './util/css/font.css'
@@ -21,6 +22,7 @@ Vue.prototype.$get = get
 Vue.prototype.$post = post
 Vue.use(ElementUI)
 Vue.use(animated)
+Vue.use(AsyncComputed)
 new Vue({
   router,
   store,

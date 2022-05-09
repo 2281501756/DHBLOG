@@ -29,9 +29,7 @@
           <div class="article_message">
             <span><i class="el-icon-position"></i>{{ articleData.label }}</span>
             <span><i class="el-icon-user"></i>{{ articleData.author }}</span>
-            <span
-              ><i class="el-icon-date"></i>{{ articleData.create_time }}</span
-            >
+            <span><i class="el-icon-date"></i>{{ date }}</span>
             <span
               ><i class="el-icon-view"></i>{{ articleData.readnum }}阅读量</span
             >
@@ -51,14 +49,34 @@
             codeStyle="tomorrow-night-eighties"
             style="z-index: 1"
           ></mavonEditor>
-          <div class="comment" style="height: 300px"></div>
+        </div>
+        <div class="content-textarea" v-if="$store.state.loginState">
+          <div style="height: 72px; display: inline-block; padding: 12px 10px">
+            <img :src="$store.state.user.photo" alt="" />
+          </div>
+          <textarea
+            cols="80"
+            rows="5"
+            placeholder="发表一条友善的评论"
+            v-model="textareaDate"
+          ></textarea>
+          <button class="textarea-button" @click="submitComment">
+            发表评论
+          </button>
+        </div>
+        <div class="content-bottom">
+          <template v-for="item of commentData">
+            <commentVue
+              :key="item.id"
+              @refresh="refresh"
+              :comment="item"
+            ></commentVue>
+          </template>
         </div>
       </div>
       <div class="right">
-        <div class="watch">
-          <Watch></Watch>
-        </div>
-        <div class="user-card">
+        <div class="right-box">
+          <Watch class="watch"></Watch>
           <CardVue
             height="200px"
             width="250px"
@@ -109,6 +127,7 @@ import Watch from '../../layout/body/views/Watch.vue'
 import Header from '../../layout/Header'
 import Footer from '../../layout/Footer.vue'
 import CardVue from '../../layout/body/views/Card.vue'
+import commentVue from './components/comment.vue'
 import { markdown } from '../../util/js/markdown'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
@@ -118,12 +137,16 @@ import { createDOM } from '../../util/js/create'
 import ImageFill from '../../components/imageFill'
 import { getArticleForID, readNumAdd } from '../../api/article'
 import { getForID } from '../../api/user'
+import { getComment, addcomment } from '../../api/comment'
+import { time_all } from '../../util/js/time'
 export default {
   data() {
     return {
       articleid: 0,
       articleData: {},
       userData: {},
+      commentData: [],
+      textareaDate: '',
       toc: []
     }
   },
@@ -132,11 +155,17 @@ export default {
     Footer,
     Watch,
     CardVue,
-    mavonEditor
+    mavonEditor,
+    commentVue
   },
   watch: {
     $route() {
       this.$destroy(this.$options.name)
+    }
+  },
+  computed: {
+    date() {
+      return time_all(this.articleData.create_time)
     }
   },
   methods: {
@@ -147,24 +176,19 @@ export default {
       let position = $(id).offset()
       position.top = position.top - 80
       $('html,body').animate({ scrollTop: position.top }, 500)
-    }
-  },
-  beforeCreate() {
-    this.articleid = this.$route.params.id
-    readNumAdd(this.articleid)
-    getArticleForID(this.articleid).then((res) => {
-      if (res.data.message === 'error') {
-        this.$router.replace('/404')
-      }
+    },
+    async getArticleDATA() {
+      this.articleid = this.$route.params.id
+      await readNumAdd(this.articleid)
+      let res = await getArticleForID(this.articleid)
+      if (res.data.message === 'error') this.$router.replace('/404')
       this.articleData = res.data.data[0]
-      getForID(this.articleData.user_id).then((res2) => {
-        this.userData = res2.data[0]
-        console.log(this.userData)
-      })
-    })
-  },
-  async mounted() {
-    this.$nextTick(() => {
+      let res2 = await getForID(this.articleData.user_id)
+      this.userData = res2.data[0]
+      this.commentInit()
+    },
+    // 添加剪切版
+    addClipboard() {
       let clipboard = new Clipboard('.copy-btn')
       // 复制成功失败的提示
       clipboard.on('success', () => {
@@ -176,14 +200,9 @@ export default {
       clipboard.on('error', () => {
         this.$message.error('失败')
       })
-    })
-
-    this.articleData.content = markdown(
-      mavonEditor,
-      this.articleData.content + ''
-    )
-
-    this.$nextTick(() => {
+    },
+    // 添加左侧菜单
+    addMenu() {
       const aArr = $(
         '.v-note-wrapper .v-note-panel .v-note-navigation-wrapper .v-note-navigation-content  a'
       ).toArray()
@@ -201,7 +220,63 @@ export default {
         }
       })
       this.toc = toc
-    })
+    },
+    // 使用markdown.js
+    useMarkdown() {
+      this.articleData.content = markdown(
+        mavonEditor,
+        this.articleData.content + ''
+      )
+    },
+    editorInit() {
+      this.getArticleDATA()
+      this.addClipboard()
+      this.useMarkdown()
+      setTimeout(() => {
+        this.addMenu()
+      }, 500)
+    },
+    async commentInit() {
+      let res = await getComment(this.articleid)
+      this.commentData = res.data
+    },
+    async submitComment() {
+      this.textareaDate = this.textareaDate.trim()
+      if (!this.textareaDate) {
+        this.$message({
+          message: '不能为空',
+          type: 'error'
+        })
+        return
+      }
+      let res = await (
+        await addcomment(
+          this.$store.state.user.id,
+          this.articleid,
+          this.textareaDate
+        )
+      ).data
+      if (res.message === 'error') {
+        this.$message({
+          message: '出错了',
+          type: 'error'
+        })
+      } else {
+        this.textareaDate = ''
+        this.commentInit()
+        this.$message({
+          message: '成功',
+          type: 'success'
+        })
+      }
+    },
+    refresh() {
+      this.commentInit()
+    }
+  },
+  beforeCreate() {},
+  mounted() {
+    this.editorInit()
   }
 }
 </script>
@@ -263,14 +338,18 @@ export default {
   background-color: #e5e5e5;
   color: #2836ff;
 }
-.watch {
+.right-box {
   position: sticky;
   top: 80px;
+}
+.watch {
   height: 150px;
-  width: 230px;
+  width: 250px;
   border-radius: 10px;
+  bottom: 0px;
   overflow: hidden;
 }
+
 .H1 {
   text-indent: 0em;
 }
@@ -289,8 +368,44 @@ export default {
 .head >>> .v-note-wrapper .v-note-panel .v-note-navigation-wrapper.transition {
   display: none;
 }
-.user-card {
-  position: sticky;
-  top: 250px;
+
+.content-bottom {
+  padding-top: 20px;
+}
+textarea {
+  vertical-align: top;
+  border-radius: 8px;
+  padding: 2px;
+  background-color: #f4f5f7;
+  resize: none;
+  outline: none;
+}
+textarea:hover,
+textarea:focus {
+  border: 1px solid #3aa2d6;
+  background-color: white;
+}
+.content-textarea {
+  margin: 20px 0;
+}
+.content-textarea img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+}
+.textarea-button {
+  vertical-align: top;
+  height: 78px;
+  width: 78px;
+  margin-left: 20px;
+  background-color: #3aa2d6;
+  border-radius: 5px;
+  font-size: 17px;
+  padding: 14px;
+  color: white;
+  border: 0;
+}
+.textarea-button:active {
+  transform: scale(0.95);
 }
 </style>

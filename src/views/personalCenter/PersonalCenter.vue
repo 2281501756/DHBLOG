@@ -66,10 +66,10 @@
 </template>
 
 <script>
-import NavVue from '../layout/body/views/Nav.vue'
+import NavVue from '../../layout/body/views/Nav.vue'
 import ArticleCardMini from './components/ArticleCardMini.vue'
-import { getUserArticle } from '../api/article'
-import { getForID } from '../api/user'
+import { getUserArticle } from '../../api/article'
+import { getForID } from '../../api/user'
 export default {
   components: {
     NavVue,
