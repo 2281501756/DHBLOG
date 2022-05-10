@@ -64,6 +64,23 @@ const getUserArticle = (req, res) => {
   )
 }
 
+const commentNumAdd = (req, res) => {
+  let { articleID } = req.query
+  db.asyncdbconnect("UPDATE totaldata SET commentnum = commentnum + 1 ")
+  db.asyncdbconnect("UPDATE article SET comment = comment + 1 WHERE id = ?", [articleID], (err, data) => {
+    if (err) {
+      res.json({
+        message: 'error'
+      })
+      return
+    }
+    res.json({
+      message: 'success',
+      data: data
+    })
+  })
+}
+
 const getFavour = async (req, res) => {
   const data = await db.asyncdbconnect(
     'SELECT  id, title, photo, readnum  FROM `article` ORDER BY readnum DESC limit 0, 4',
@@ -160,8 +177,9 @@ const articleDelete = (req, res) => {
 
 module.exports = {
   get,
-  getForid,
   add,
+  commentNumAdd,
+  getForid,
   modify,
   readNumAdd,
   getUserArticle,

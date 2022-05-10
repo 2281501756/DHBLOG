@@ -65,3 +65,13 @@ export const articleDelete = (id) => {
     }
   })
 }
+
+export const commentNumAdd = (articleID) => {
+  return require({
+    method: 'GET',
+    url: '/article/commentNumAdd',
+    params: {
+      articleID
+    }
+  })
+}

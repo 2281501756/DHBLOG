@@ -135,7 +135,7 @@ import Clipboard from 'clipboard'
 import $ from 'jquery'
 import { createDOM } from '../../util/js/create'
 import ImageFill from '../../components/imageFill'
-import { getArticleForID, readNumAdd } from '../../api/article'
+import { getArticleForID, readNumAdd, commentNumAdd } from '../../api/article'
 import { getForID } from '../../api/user'
 import { getComment, addcomment } from '../../api/comment'
 import { time_all } from '../../util/js/time'
@@ -263,6 +263,7 @@ export default {
         })
       } else {
         this.textareaDate = ''
+        commentNumAdd(this.articleid)
         this.commentInit()
         this.$message({
           message: '成功',
