@@ -11,7 +11,7 @@
       >
         DH|BLOG
       </div>
-      <div>新闻</div>
+      <div @click="routerPush('/news')">新闻</div>
       <div>音乐</div>
       <div>动漫</div>
       <div>关于</div>

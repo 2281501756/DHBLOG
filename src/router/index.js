@@ -29,6 +29,10 @@ const routes = [
     path: '/user/personal/center/:id',
     component: () => import('../views/personalCenter/PersonalCenter')
   },
+  {
+    path: '/news',
+    component:() => import('../views/news/news')
+  },
 
   // 后台
   {

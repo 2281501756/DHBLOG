@@ -2,7 +2,7 @@
   <div id="app">
     <transition name="fold-left">
       <keep-alive>
-        <router-view />
+        <router-view :key="this.$route.fullPath" />
       </keep-alive>
     </transition>
   </div>
