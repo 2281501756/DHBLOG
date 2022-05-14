@@ -24,11 +24,17 @@
             <span>{{ tableData[tableClickID].name }} · 热搜榜</span>
           </div>
           <div class="news-main">
-            <div class="new-list-data">
-              <div class="index">1</div>
-              <div class="title">标题标题标题标题</div>
-              <div class="fire">961万</div>
-            </div>
+            <a
+              class="new-list-data"
+              v-for="i of newsDate"
+              :key="i.index"
+              :href="i.link"
+              target="_blank"
+            >
+              <div class="index">{{ i.index }}</div>
+              <div class="title">{{ i.title }}</div>
+              <div class="fire">{{ i.hotValue }}</div>
+            </a>
           </div>
         </div>
       </div>
@@ -50,7 +56,8 @@ export default {
           id: 0,
           name: 'bilibili',
           photo:
-            'https://file.ipadown.com/tophub/assets/images/media/bilibili.com.png_50x50.png'
+            'https://file.ipadown.com/tophub/assets/images/media/bilibili.com.png_50x50.png',
+          qid: '74KvxwokxM'
         },
         {
           id: 1,
@@ -63,24 +70,43 @@ export default {
           id: 2,
           name: '抖音',
           photo:
-            'https://file.ipadown.com/tophub/assets/images/media/iesdouyin.com.png_50x50.png'
+            'https://file.ipadown.com/tophub/assets/images/media/iesdouyin.com.png_50x50.png',
+          qid: 'DpQvNABoNE'
         },
         {
           id: 3,
           name: '知乎',
           photo:
-            'https://file.ipadown.com/tophub/assets/images/media/zhihu.com.png_50x50.png'
+            'https://file.ipadown.com/tophub/assets/images/media/zhihu.com.png_50x50.png',
+          qid: 'mproPpoq6O'
+        },
+        {
+          id: 4,
+          name: 'AcFun',
+          photo:
+            'https://file.ipadown.com/tophub/assets/images/media/acfun.cn.png_50x50.png',
+          qid: 'qENeYpdY49'
         }
-      ]
+      ],
+      newsDate: []
     }
   },
   methods: {
     clickTable(id) {
       this.tableClickID = id
+      this.requireData(this.tableData[id].qid).then((res) => {
+        this.newsDate = res.data.data
+      })
     },
     requireData(id) {
       return axios({
         url: 'https://api.codelife.cc/api/top/list',
+        headers: {
+          signaturekey: 'U2FsdGVkX1/TktsNQEfiqlf/c8bs07azFRiEzAx48sQ=',
+          token:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjA3YmE2MDQxMTE4ZjI0N2UwODNiNDIiLCJpYXQiOjE2NDk4OTY2NjksImV4cCI6MTY4MTAwMDY2OX0.0tjvmpvz_Hv7xOpCCictWj5iNLhnSoGE1Lo4Abw5fNo',
+          version: '1.2.29.3'
+        },
         method: 'POST',
         data: {
           id
@@ -90,8 +116,8 @@ export default {
   },
 
   mounted() {
-    this.requireData(this.tableData[1].qid).then((res) => {
-      console.log(res.data)
+    this.requireData(this.tableData[0].qid).then((res) => {
+      this.newsDate = res.data.data
     })
   },
   components: { Header, Footer }
@@ -113,7 +139,7 @@ export default {
 .content {
   min-height: 100vh;
   width: 70vw;
-  background-color: white;
+  background-color: #fafafa;
   display: flex;
   justify-content: center;
   border-radius: 5px;
@@ -165,19 +191,65 @@ export default {
   height: 35px;
   width: 100%;
   position: relative;
+  display: block;
 }
 .new-list-data > div {
   display: inline-block;
+  position: relative;
 }
 .new-list-data .index {
   height: 20px;
   width: 20px;
-  background-color: red;
+  background-color: #f0f1f4;
+  color: black;
   border-radius: 4px;
-  color: white;
   text-align: center;
   line-height: 20px;
   margin-right: 10px;
+  position: absolute;
+  top: 7.5px;
+  font-size: 12px;
+}
+
+.new-list-data .index {
+  height: 20px;
+  width: 20px;
+  background-color: #f0f1f4;
+  color: black;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 10px;
+  position: absolute;
+  top: 7.5px;
+  font-size: 12px;
+}
+.new-list-data .index:hover {
+  color: #54a0ff;
+}
+.news-main .new-list-data:nth-child(1) .index {
+  background-color: #f22941;
+  color: white;
+}
+.news-main .new-list-data:nth-child(2) .index {
+  background-color: #f46400;
+  color: white;
+}
+.news-main .new-list-data:nth-child(3) .index {
+  background-color: #f2a800;
+  color: white;
+}
+.new-list-data .title {
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  position: absolute;
+  left: 40px;
+}
+.new-list-data .title:hover {
+  color: #54a0ff;
 }
 .new-list-data .fire {
   position: absolute;
