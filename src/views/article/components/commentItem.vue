@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getForID } from '../../../api/user'
+import { getForID } from '../../../api/base/user'
 import { time_all } from '../../../util/js/time'
 export default {
   props: {

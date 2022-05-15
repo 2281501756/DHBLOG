@@ -85,7 +85,7 @@ import axios from '../../util/js/http/index'
 import NavVue from '../../layout/body/views/Nav.vue'
 import { createDOM } from '../../util/js/create'
 import ImageFill from '@/components/imageFill'
-import { getArticleForID, articleModify } from '../../api/article'
+import { getArticleForID, articleModify } from '../../api/base/article'
 export default {
   data() {
     return {

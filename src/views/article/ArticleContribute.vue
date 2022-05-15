@@ -85,6 +85,7 @@ import axios from '../../util/js/http/index'
 import NavVue from '../../layout/body/views/Nav.vue'
 import { createDOM } from '../../util/js/create'
 import ImageFill from '@/components/imageFill'
+import { articleAdd } from '../../api/base/article'
 export default {
   data() {
     return {
@@ -165,7 +166,7 @@ export default {
         this.$message.error('标题不能为空')
         return
       }
-      this.$post('/article/add', this.formdata).then((res) => {
+      articleAdd(this.formdata).then((res) => {
         if (res.data.message === 'succeed')
           this.$message({
             message: '提交成功',

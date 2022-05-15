@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { articleDelete } from '../../../api/article'
+import { articleDelete } from '../../../api/base/article'
 export default {
   props: ['article'],
   data() {

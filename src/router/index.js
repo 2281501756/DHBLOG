@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../components/Login.vue')
   },
   {
     path: '/article/contribute',
@@ -32,26 +32,6 @@ const routes = [
   {
     path: '/news',
     component:() => import('../views/news/news')
-  },
-
-  // 后台
-  {
-    path: '/admin',
-    redirect: '/admin/user'
-  },
-  {
-    path: '/manageLogin',
-    component: () => import('../components/admin/manageLogin')
-  },
-  {
-    path: '/admin',
-    component: () => import('../components/admin/admin'),
-    children: [
-      {
-        path: '/admin/user',
-        component: () => import('../views/admin/user')
-      }
-    ]
   },
   {
     path: '/404',

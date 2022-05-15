@@ -135,9 +135,9 @@ import Clipboard from 'clipboard'
 import $ from 'jquery'
 import { createDOM } from '../../util/js/create'
 import ImageFill from '../../components/imageFill'
-import { getArticleForID, readNumAdd, commentNumAdd } from '../../api/article'
-import { getForID } from '../../api/user'
-import { getComment, addcomment } from '../../api/comment'
+import { getArticleForID, readNumAdd, commentNumAdd } from '../../api/base/article'
+import { getForID } from '../../api/base/user'
+import { getComment, addcomment } from '../../api/base/comment'
 import { time_all } from '../../util/js/time'
 export default {
   data() {

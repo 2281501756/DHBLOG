@@ -37,9 +37,9 @@
 
 <script>
 import commentItemVue from './commentItem.vue'
-import { getForID } from '../../../api/user'
+import { getForID } from '../../../api/base/user'
 import { time_all } from '../../../util/js/time'
-import { reply } from '../../../api/comment'
+import { reply } from '../../../api/base/comment'
 export default {
   data() {
     return {

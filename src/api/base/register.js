@@ -1,4 +1,4 @@
-import require from '../util/js/http/index'
+import require from '../../util/js/http/index'
 
 export const sendEmailCode = (email) => {
   return require({

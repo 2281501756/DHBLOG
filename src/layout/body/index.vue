@@ -172,7 +172,7 @@ import ArticleCard from './views/ArticleCard.vue'
 import Introduce from './views/Introduce.vue'
 import Card from './views/Card.vue'
 import Label from './views/Label.vue'
-import { getArticle, getFavour } from '../../api/article'
+import { getArticle, getFavour } from '../../api/base/article'
 export default {
   data() {
     return {

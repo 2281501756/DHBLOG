@@ -68,8 +68,8 @@
 <script>
 import NavVue from '../../layout/body/views/Nav.vue'
 import ArticleCardMini from './components/ArticleCardMini.vue'
-import { getUserArticle } from '../../api/article'
-import { getForID } from '../../api/user'
+import { getUserArticle } from '../../api/base/article'
+import { getForID } from '../../api/base/user'
 export default {
   components: {
     NavVue,

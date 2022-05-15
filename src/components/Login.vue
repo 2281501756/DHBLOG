@@ -181,11 +181,11 @@
 </template>
 
 <script>
-import { login } from '../api/login'
+import { login } from '../api/base/login'
 import { set_token } from '../util/js/token'
 import store from '../store'
-import { judge_account } from '../api/user'
-import { sendEmailCode, acceptEmailCode, userCreate } from '../api/register'
+import { judge_account } from '../api/base/user'
+import { sendEmailCode, acceptEmailCode, userCreate } from '../api/base/register'
 export default {
   data() {
     return {

@@ -61,7 +61,7 @@
 
 <script>
 import { delete_token } from '../../../util/js/token'
-import LoginVue from '../../../views/Login.vue'
+import LoginVue from '../../../components/Login.vue'
 import { createDOM } from '../../../util/js/create'
 export default {
   data() {

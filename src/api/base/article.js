@@ -1,4 +1,4 @@
-import require from '../util/js/http/index'
+import require from '../../util/js/http/index'
 
 export const getArticle = (num, pageSize) => {
   return require({
@@ -11,6 +11,7 @@ export const getArticle = (num, pageSize) => {
   })
 }
 
+
 export const getArticleForID = (id) => {
   return require({
     method: 'GET',
@@ -18,6 +19,14 @@ export const getArticleForID = (id) => {
     params: {
       id: id
     }
+  })
+}
+
+export const articleAdd = (data) => {
+  return require({
+    method: 'POST',
+    url: '/article/add',
+    data: data
   })
 }
 

@@ -32,7 +32,7 @@
 
 <script>
 import Watch from './Watch.vue'
-import { totalData } from '../../../api/totalData'
+import { totalData } from '../../../api/base/totalData'
 export default {
   data() {
     return {
