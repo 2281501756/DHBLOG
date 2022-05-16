@@ -19,3 +19,14 @@ export function judge_account(account) {
     }
   })
 }
+
+export function updatePhoto(id, photo) {
+  return require({
+    method: 'POST',
+    url: '/user/update/photo',
+    data: {
+      id,
+      photo
+    }
+  })
+}

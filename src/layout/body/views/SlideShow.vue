@@ -24,7 +24,7 @@
       alt=""
       style="width: 100%; object-position: center; object-fit: cover"
     />
-    <div class="arrows"><i class="el-icon-d-arrow-left"></i>></div>
+    <div class="arrows"><i class="el-icon-d-arrow-left"></i></div>
   </div>
 </template>
 
@@ -78,6 +78,7 @@ export default {
 <style scoped>
 .image {
   position: relative;
+  height: 100vh;
 }
 .image > img {
   position: absolute;
@@ -88,7 +89,6 @@ export default {
   width: 100%;
   z-index: 10;
   position: absolute;
-  top: 50%;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -109,7 +109,30 @@ export default {
   animation: bounce-in 1s;
 }
 .arrows {
-  height: 50;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  font-size: 50px;
+  color: #fff;
+  transform: translateX(-50%) rotateZ(-90deg);
+  animation: 2s arrows linear infinite;
+}
+
+@keyframes arrows {
+  0% {
+    opacity: 0;
+    transform: translateY(0px) rotateZ(-90deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.1;
+  }
+  100% {
+    transform: translateY(75px) rotateZ(-90deg);
+    opacity: 0;
+  }
 }
 
 @keyframes bounce-in {

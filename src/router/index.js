@@ -26,12 +26,20 @@ const routes = [
     component: () => import('../views/article/index')
   },
   {
+    path: '/user/modify',
+    component: () => import('../views/userModify')
+  },
+  {
     path: '/user/personal/center/:id',
     component: () => import('../views/personalCenter/PersonalCenter')
   },
   {
     path: '/news',
     component:() => import('../views/news/news')
+  },
+  {
+    path: '/demo',
+    component: () => import('../components/cropper')
   },
   {
     path: '/404',

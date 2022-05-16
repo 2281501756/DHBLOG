@@ -53,7 +53,7 @@
       <div class="user-card-item" @click="routerPush('/user/personal/center/')">
         个人中心
       </div>
-      <div class="user-card-item">投稿管理</div>
+      <div class="user-card-item" @click="routerPush('/user/modify/')">信息编辑</div>
       <div class="user-card-item" @click="logout">退出登录</div>
     </div>
   </div>

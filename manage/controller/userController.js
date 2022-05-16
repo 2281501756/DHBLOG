@@ -21,7 +21,7 @@ const judge_account = async (req, res) => {
   res.json(data)
 }
 
-const  create = (req, res) => {
+const create = (req, res) => {
   let pwd = req.body.password
   let md5 = crypto.createHash('md5')
   let newpwd = md5.update(pwd).digest('hex')
@@ -48,9 +48,26 @@ const  create = (req, res) => {
   )
 }
 
+const updatePhoto = (req, res) => {
+  const { photo, id } = req.body
+  db.dbconnect("update user set photo = ? where id = ?", [photo, parseInt(id)], (err, data) => {
+    if (err) {
+      res.json({
+        message: 'error'
+      })
+      return
+    }
+    res.json({
+      message: 'success',
+      data
+    })
+  })
+}
+
 module.exports = {
   get,
   getForID,
   create,
-  judge_account
+  judge_account,
+  updatePhoto
 }
