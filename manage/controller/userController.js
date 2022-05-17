@@ -64,10 +64,27 @@ const updatePhoto = (req, res) => {
   })
 }
 
+const updateData = (req, res) => {
+  const { id, nickname, description } = req.body
+  db.dbconnect("update user set nickname = ? , description = ? where id = 1", [nickname, description, parseInt(id)], (err, data) => {
+    if (err) {
+      res.json({
+        message: 'error'
+      })
+      return
+    }
+    res.json({
+      message: 'success',
+      data
+    })
+  })
+}
+
 module.exports = {
   get,
   getForID,
   create,
   judge_account,
-  updatePhoto
+  updatePhoto,
+  updateData
 }

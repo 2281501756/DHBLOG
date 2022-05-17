@@ -18,7 +18,12 @@
     </div>
 
     <div class="user-data">
-      <div class="user-data-header">基本信息</div>
+      <div class="user-data-header">
+        <span>基本信息</span>
+        <el-button style="float: right" type="primary" @click="changeUserData"
+          >保存</el-button
+        >
+      </div>
       <user-bar
         :title="'昵称'"
         :message="$store.state.user.nickname"
@@ -73,7 +78,7 @@ import baseBar from './components/baseBar.vue'
 import userBar from './components/userBar.vue'
 import { YMD } from '../../util/js/time'
 import require from '../../util/js/http/index'
-import { updatePhoto } from '../../api/base/user'
+import { updatePhoto, updateData } from '../../api/base/user'
 export default {
   data() {
     return {
@@ -82,9 +87,7 @@ export default {
       imgaeDataUrl: '',
       userDate: {
         nickname: this.$store.state.user.nickname,
-        description: this.$store.state.user.description,
-        gender: this.$store.state.user.gender,
-        photo: this.$store.state.user.photo
+        description: this.$store.state.user.description
       }
     }
   },
@@ -176,6 +179,27 @@ export default {
       if (mime === 'image/jpeg') filename = filename + '.jpg'
       if (mime === 'image/png') filename = filename + '.png'
       return new File([u8arr], filename, { type: mime })
+    },
+    changeUserData() {
+      updateData(
+        this.$store.state.user.id,
+        this.userDate.nickname,
+        this.userDate.description
+      ).then((res) => {
+        if (res.data.message === 'error') {
+          this.$message({
+            type: 'error',
+            message: '出问题'
+          })
+        } else {
+          this.$message({
+            type: 'success',
+            message: '修改成功'
+          })
+          this.$store.state.user.nickname = this.userDate.nickname
+          this.$store.state.user.nickname = this.userDate.description
+        }
+      })
     }
   }
 }

@@ -30,3 +30,15 @@ export function updatePhoto(id, photo) {
     }
   })
 }
+
+export function updateData(id, nickname, description) {
+  return require({
+    method: 'POST',
+    url: '/user/update/data',
+    data: {
+      id,
+      nickname,
+      description
+    }
+  })
+}
