@@ -1,0 +1,108 @@
+Date : 2022-05-18 22:25:01
+Directory : d:\DesktopCopy\demo\blog\blog\src
+Total : 56 files,  6071 codes, 46 comments, 326 blanks, all 6443 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Vue        |         27 |      4,481 |          9 |        103 |      4,593 |
+| CSS        |          5 |        625 |         23 |        115 |        763 |
+| JavaScript |         22 |        595 |         12 |         83 |        690 |
+| HTML       |          1 |        319 |          2 |         24 |        345 |
+| JSON       |          1 |         51 |          0 |          1 |         52 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                  | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                     |         56 |      6,071 |         46 |        326 |      6,443 |
+| api                                                                                   |          6 |        201 |          0 |         28 |        229 |
+| api\base                                                                              |          6 |        201 |          0 |         28 |        229 |
+| components                                                                            |          4 |        768 |          0 |         17 |        785 |
+| components\cropper                                                                    |          1 |         53 |          0 |          3 |         56 |
+| components\imageFill                                                                  |          1 |        166 |          0 |          4 |        170 |
+| font                                                                                  |          5 |        902 |         21 |        117 |      1,040 |
+| global                                                                                |          1 |          8 |          0 |          3 |         11 |
+| layout                                                                                |         11 |      1,449 |          3 |         41 |      1,493 |
+| layout\body                                                                           |          8 |      1,311 |          3 |         32 |      1,346 |
+| layout\body\views                                                                     |          7 |        975 |          2 |         29 |      1,006 |
+| router                                                                                |          2 |         88 |          0 |         11 |         99 |
+| store                                                                                 |          1 |         26 |          0 |          3 |         29 |
+| util                                                                                  |         13 |        342 |         16 |         57 |        415 |
+| util\css                                                                              |          3 |        157 |          4 |         24 |        185 |
+| util\js                                                                               |         10 |        185 |         12 |         33 |        230 |
+| util\js\http                                                                          |          4 |         41 |          4 |         12 |         57 |
+| views                                                                                 |         11 |      2,233 |          6 |         43 |      2,282 |
+| views\article                                                                         |          5 |      1,247 |          6 |         20 |      1,273 |
+| views\article\components                                                              |          2 |        277 |          0 |          7 |        284 |
+| views\news                                                                            |          1 |        256 |          0 |          5 |        261 |
+| views\personalCenter                                                                  |          2 |        345 |          0 |          7 |        352 |
+| views\personalCenter\components                                                       |          1 |        134 |          0 |          3 |        137 |
+| views\userModify                                                                      |          3 |        385 |          0 |         11 |        396 |
+| views\userModify\components                                                           |          2 |         95 |          0 |          6 |        101 |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                              | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\DesktopCopy\demo\blog\blog\src\App.vue                                             | Vue        |         31 |          0 |          2 |         33 |
+| d:\DesktopCopy\demo\blog\blog\src\api\base\article.js                                 | JavaScript |         78 |          0 |         11 |         89 |
+| d:\DesktopCopy\demo\blog\blog\src\api\base\comment.js                                 | JavaScript |         32 |          0 |          4 |         36 |
+| d:\DesktopCopy\demo\blog\blog\src\api\base\login.js                                   | JavaScript |         11 |          0 |          2 |         13 |
+| d:\DesktopCopy\demo\blog\blog\src\api\base\register.js                                | JavaScript |         33 |          0 |          4 |         37 |
+| d:\DesktopCopy\demo\blog\blog\src\api\base\totalData.js                               | JavaScript |          7 |          0 |          2 |          9 |
+| d:\DesktopCopy\demo\blog\blog\src\api\base\user.js                                    | JavaScript |         40 |          0 |          5 |         45 |
+| d:\DesktopCopy\demo\blog\blog\src\components\404.vue                                  | Vue        |          7 |          0 |          3 |         10 |
+| d:\DesktopCopy\demo\blog\blog\src\components\Login.vue                                | Vue        |        542 |          0 |          7 |        549 |
+| d:\DesktopCopy\demo\blog\blog\src\components\cropper\index.vue                        | Vue        |         53 |          0 |          3 |         56 |
+| d:\DesktopCopy\demo\blog\blog\src\components\imageFill\index.vue                      | Vue        |        166 |          0 |          4 |        170 |
+| d:\DesktopCopy\demo\blog\blog\src\font\demo.css                                       | CSS        |        439 |         19 |         83 |        541 |
+| d:\DesktopCopy\demo\blog\blog\src\font\demo_index.html                                | HTML       |        319 |          2 |         24 |        345 |
+| d:\DesktopCopy\demo\blog\blog\src\font\iconfont.css                                   | CSS        |         29 |          0 |          8 |         37 |
+| d:\DesktopCopy\demo\blog\blog\src\font\iconfont.js                                    | JavaScript |         64 |          0 |          1 |         65 |
+| d:\DesktopCopy\demo\blog\blog\src\font\iconfont.json                                  | JSON       |         51 |          0 |          1 |         52 |
+| d:\DesktopCopy\demo\blog\blog\src\global\register-element.js                          | JavaScript |          8 |          0 |          3 |         11 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\Footer.vue                                   | Vue        |         88 |          0 |          3 |         91 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\Header.vue                                   | Vue        |         25 |          0 |          3 |         28 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\index.vue                               | Vue        |        336 |          1 |          3 |        340 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\views\ArticleCard.vue                   | Vue        |        163 |          0 |          4 |        167 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\views\Card.vue                          | Vue        |        110 |          0 |          3 |        113 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\views\Introduce.vue                     | Vue        |        111 |          0 |          3 |        114 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\views\Label.vue                         | Vue        |         37 |          0 |          3 |         40 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\views\Nav.vue                           | Vue        |        303 |          1 |          5 |        309 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\views\SlideShow.vue                     | Vue        |        142 |          1 |          6 |        149 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\body\views\Watch.vue                         | Vue        |        109 |          0 |          5 |        114 |
+| d:\DesktopCopy\demo\blog\blog\src\layout\index.vue                                    | Vue        |         25 |          0 |          3 |         28 |
+| d:\DesktopCopy\demo\blog\blog\src\main.js                                             | JavaScript |         23 |          0 |          4 |         27 |
+| d:\DesktopCopy\demo\blog\blog\src\router\guard.js                                     | JavaScript |         36 |          0 |          6 |         42 |
+| d:\DesktopCopy\demo\blog\blog\src\router\index.js                                     | JavaScript |         52 |          0 |          5 |         57 |
+| d:\DesktopCopy\demo\blog\blog\src\store\index.js                                      | JavaScript |         26 |          0 |          3 |         29 |
+| d:\DesktopCopy\demo\blog\blog\src\util\css\font.css                                   | CSS        |         24 |          0 |          4 |         28 |
+| d:\DesktopCopy\demo\blog\blog\src\util\css\global.css                                 | CSS        |        129 |          4 |         19 |        152 |
+| d:\DesktopCopy\demo\blog\blog\src\util\css\reset.css                                  | CSS        |          4 |          0 |          1 |          5 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\create.js                                   | JavaScript |         15 |          0 |          5 |         20 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\http\baseURL.js                             | JavaScript |          2 |          0 |          2 |          4 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\http\index.js                               | JavaScript |          3 |          0 |          3 |          6 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\http\musicRequire.js                        | JavaScript |          3 |          0 |          3 |          6 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\http\require.js                             | JavaScript |         33 |          4 |          4 |         41 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\image.js                                    | JavaScript |         52 |          8 |          6 |         66 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\init.js                                     | JavaScript |         14 |          0 |          2 |         16 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\markdown.js                                 | JavaScript |         40 |          0 |          4 |         44 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\time.js                                     | JavaScript |         16 |          0 |          3 |         19 |
+| d:\DesktopCopy\demo\blog\blog\src\util\js\token.js                                    | JavaScript |          7 |          0 |          1 |          8 |
+| d:\DesktopCopy\demo\blog\blog\src\views\article\ArticleContribute.vue                 | Vue        |        267 |          1 |          4 |        272 |
+| d:\DesktopCopy\demo\blog\blog\src\views\article\ArticleModify.vue                     | Vue        |        295 |          1 |          4 |        300 |
+| d:\DesktopCopy\demo\blog\blog\src\views\article\components\comment.vue                | Vue        |        193 |          0 |          4 |        197 |
+| d:\DesktopCopy\demo\blog\blog\src\views\article\components\commentItem.vue            | Vue        |         84 |          0 |          3 |         87 |
+| d:\DesktopCopy\demo\blog\blog\src\views\article\index.vue                             | Vue        |        408 |          4 |          5 |        417 |
+| d:\DesktopCopy\demo\blog\blog\src\views\news\news.vue                                 | Vue        |        256 |          0 |          5 |        261 |
+| d:\DesktopCopy\demo\blog\blog\src\views\personalCenter\PersonalCenter.vue             | Vue        |        211 |          0 |          4 |        215 |
+| d:\DesktopCopy\demo\blog\blog\src\views\personalCenter\components\ArticleCardMini.vue | Vue        |        134 |          0 |          3 |        137 |
+| d:\DesktopCopy\demo\blog\blog\src\views\userModify\components\baseBar.vue             | Vue        |         38 |          0 |          3 |         41 |
+| d:\DesktopCopy\demo\blog\blog\src\views\userModify\components\userBar.vue             | Vue        |         57 |          0 |          3 |         60 |
+| d:\DesktopCopy\demo\blog\blog\src\views\userModify\index.vue                          | Vue        |        290 |          0 |          5 |        295 |
+| Total                                                                                 |            |      6,071 |         46 |        326 |      6,443 |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

@@ -109,6 +109,7 @@ const add = (req, res) => {
           message: 'error'
         })
       } else {
+        db.dbconnect("update user set article_num = article_num + 1 where id = ?", [req.body.userID])
         db.dbconnect(
           'update totaldata set articlenum = articlenum + 1',
           [],
@@ -151,7 +152,9 @@ const modify = (req, res) => {
 
 const readNumAdd = (req, res) => {
   let id = parseInt(req.query.id)
-  db.dbconnect('update totaldata set readnum = readnum + 1', [], () => {})
+  let userid = parseInt(req.query.userid)
+  db.dbconnect('update totaldata set readnum = readnum + 1', [userid])
+  db.dbconnect('update user set read_num = read_num + 1 where id = ?', [id], () => {})
   db.dbconnect(
     'update article set readnum = readnum + 1 where id = ?',
     [id],

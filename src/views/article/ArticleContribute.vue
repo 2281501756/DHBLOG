@@ -1,7 +1,7 @@
 <template>
   <div class="editor">
     <video
-      src="@/assets/videos/3.mp4"
+      :src="`${this.$base_url}/static/video/3.mp4`"
       preload="auto"
       loop
       playsinline
@@ -47,7 +47,9 @@
           name="file"
           @change="up"
           fontSize="800px"
+          style="display: none"
         />
+        <div class="file-box" @click="fileBoxClick">选择图片</div>
       </label>
       <img
         class="now-imgae"
@@ -86,6 +88,7 @@ import NavVue from '../../layout/body/views/Nav.vue'
 import { createDOM } from '../../util/js/create'
 import ImageFill from '@/components/imageFill'
 import { articleAdd } from '../../api/base/article'
+import { compressImage } from '../../util/js/image'
 export default {
   data() {
     return {
@@ -155,10 +158,26 @@ export default {
     },
     up() {
       let file = this.$refs.file.files[0]
-      let data = new FormData()
-      data.append('file', file)
-      axios.post('/upload', data, {}).then((res) => {
-        this.formdata.photo = `${this.$base_url + res.data.url}`
+      compressImage(file).then((res) => {
+        file = res
+        let data = new FormData()
+        data.append('file', file)
+        axios
+          .post('/upload', data, {})
+          .then((res) => {
+            this.formdata.photo = `${this.$base_url + res.data.url}`
+            this.$message({
+              message: '上传成功',
+              type: 'success'
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+            this.$message({
+              message: '上传失败',
+              type: 'error'
+            })
+          })
       })
     },
     submit() {
@@ -180,6 +199,9 @@ export default {
     },
     craeteImg() {
       createDOM(ImageFill, { url: this.formdata.photo })
+    },
+    fileBoxClick() {
+      this.$refs.file.click()
     }
   }
 }
@@ -237,5 +259,13 @@ button {
   height: 40px;
   vertical-align: middle;
   cursor: pointer;
+}
+.file-box {
+  vertical-align: middle;
+  display: inline-block;
+  height: 30px;
+  padding: 0 20px;
+  margin: 0 20px;
+  background-color: white;
 }
 </style>

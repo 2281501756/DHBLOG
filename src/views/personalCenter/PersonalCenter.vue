@@ -25,7 +25,7 @@
             </div>
             <div>
               <div class="user-data-name">阅读量</div>
-              <div class="user-data-num">0</div>
+              <div class="user-data-num">{{ userData.read_num }}</div>
             </div>
           </div>
         </div>

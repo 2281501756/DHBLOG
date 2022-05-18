@@ -135,7 +135,11 @@ import Clipboard from 'clipboard'
 import $ from 'jquery'
 import { createDOM } from '../../util/js/create'
 import ImageFill from '../../components/imageFill'
-import { getArticleForID, readNumAdd, commentNumAdd } from '../../api/base/article'
+import {
+  getArticleForID,
+  readNumAdd,
+  commentNumAdd
+} from '../../api/base/article'
 import { getForID } from '../../api/base/user'
 import { getComment, addcomment } from '../../api/base/comment'
 import { time_all } from '../../util/js/time'
@@ -179,12 +183,12 @@ export default {
     },
     async getArticleDATA() {
       this.articleid = this.$route.params.id
-      await readNumAdd(this.articleid)
       let res = await getArticleForID(this.articleid)
       if (res.data.message === 'error') this.$router.replace('/404')
       this.articleData = res.data.data[0]
       let res2 = await getForID(this.articleData.user_id)
       this.userData = res2.data[0]
+      await readNumAdd(this.articleid, this.userData.id)
       this.commentInit()
     },
     // 添加剪切版

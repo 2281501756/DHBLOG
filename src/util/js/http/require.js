@@ -7,7 +7,7 @@ export class httpRequireClass {
     this.baseURL = baseURL
     this.instance =  axios.create({
       baseURL: baseURL,
-      timeout: 5000
+      timeout: 20000
     })
     this.initInterceptors()
   }

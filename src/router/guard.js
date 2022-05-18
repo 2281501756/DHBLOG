@@ -9,7 +9,8 @@ NProgress.configure({ easing: 'ease', speed: 1000 })
 const blackList = [
   '/article/contribute',
   '/user/personal/center/',
-  '/article/modify'
+  '/article/modify',
+  '/user/modify/'
 ]
 
 const inBlackList = (path) => {

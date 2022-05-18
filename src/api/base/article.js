@@ -38,12 +38,14 @@ export const articleModify = (data) => {
   })
 }
 
-export const readNumAdd = (id) => {
+export const readNumAdd = (id, userid) => {
+  console.log(userid);
   return require({
     method: 'GET',
     url: '/article/read/num/add',
     params: {
-      id: id
+      id,
+      userid
     }
   })
 }

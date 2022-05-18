@@ -79,6 +79,7 @@ import userBar from './components/userBar.vue'
 import { YMD } from '../../util/js/time'
 import require from '../../util/js/http/index'
 import { updatePhoto, updateData } from '../../api/base/user'
+import { dataURLtoFile } from '../../util/js/image'
 export default {
   data() {
     return {
@@ -141,7 +142,7 @@ export default {
       })
     },
     up(baseURL) {
-      let file = this.dataURLtoFile(baseURL, 'demo')
+      let file = dataURLtoFile(baseURL, 'demo')
       let data = new FormData()
       data.append('file', file)
       require({
@@ -166,19 +167,6 @@ export default {
           }
         })
       })
-    },
-    dataURLtoFile(dataurl, filename) {
-      let arr = dataurl.split(','),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n)
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n)
-      }
-      if (mime === 'image/jpeg') filename = filename + '.jpg'
-      if (mime === 'image/png') filename = filename + '.png'
-      return new File([u8arr], filename, { type: mime })
     },
     changeUserData() {
       updateData(

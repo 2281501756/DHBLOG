@@ -66,13 +66,14 @@ const updatePhoto = (req, res) => {
 
 const updateData = (req, res) => {
   const { id, nickname, description } = req.body
-  db.dbconnect("update user set nickname = ? , description = ? where id = 1", [nickname, description, parseInt(id)], (err, data) => {
+  db.dbconnect("update user set nickname = ? , description = ? where id = ?", [nickname, description, parseInt(id)], (err, data) => {
     if (err) {
       res.json({
         message: 'error'
       })
       return
     }
+    db.dbconnect("update article author = ? where id = ?", [nickname, parseInt(id)])
     res.json({
       message: 'success',
       data
