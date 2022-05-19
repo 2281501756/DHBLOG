@@ -24,6 +24,7 @@ module.exports = {
       let pool = mysql.createPool(config)
       pool.getConnection((err, conn) => {
         if (err) {
+          console.log('异步连接失败')
           reject()
         }
         conn.query(sql, data, (err, data) => {

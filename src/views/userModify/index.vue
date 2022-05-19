@@ -196,6 +196,7 @@ export default {
 <style scoped>
 .user-modify {
   width: 100vw;
+  background: url('~@/assets/images/userModify.svg') no-repeat center/cover;
 }
 .user-photo-box {
   padding-top: 40px;
