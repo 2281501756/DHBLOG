@@ -38,8 +38,8 @@ const routes = [
     component:() => import('../views/news/news')
   },
   {
-    path: '/demo',
-    component: () => import('../components/cropper')
+    path: '/music',
+    component: () => import('../views/music')
   },
   {
     path: '/404',

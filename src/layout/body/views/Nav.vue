@@ -12,7 +12,7 @@
         DH|BLOG
       </div>
       <div @click="routerPush('/news')">新闻</div>
-      <div>音乐</div>
+      <div @click="routerPush('/music')">音乐</div>
       <div>动漫</div>
       <div>关于</div>
       <div>网站导航</div>
@@ -53,7 +53,9 @@
       <div class="user-card-item" @click="routerPush('/user/personal/center/')">
         个人中心
       </div>
-      <div class="user-card-item" @click="routerPush('/user/modify/')">信息编辑</div>
+      <div class="user-card-item" @click="routerPush('/user/modify/')">
+        信息编辑
+      </div>
       <div class="user-card-item" @click="logout">退出登录</div>
     </div>
   </div>
