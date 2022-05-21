@@ -49,7 +49,8 @@
           fontSize="800px"
           style="display: none"
         />
-        <div class="file-box" @click="fileBoxClick">选择图片</div>
+        <div class="file-box" @click="handleImageRefresh">刷新</div>
+        <div class="file-box" @click="fileBoxClick">上传图片</div>
       </label>
       <img
         class="now-imgae"
@@ -92,26 +93,7 @@ import { compressImage } from '../../util/js/image'
 export default {
   data() {
     return {
-      imgList: [
-        {
-          value: `${this.$base_url}/static/image/articleImage/1.jpg`
-        },
-        {
-          value: `${this.$base_url}/static/image/articleImage/2.jpg`
-        },
-        {
-          value: `${this.$base_url}/static/image/articleImage/3.jpg`
-        },
-        {
-          value: `${this.$base_url}/static/image/articleImage/4.jpg`
-        },
-        {
-          value: `${this.$base_url}/static/image/articleImage/5.jpg`
-        },
-        {
-          value: `${this.$base_url}/static/image/articleImage/6.jpg`
-        }
-      ],
+      imgList: [],
       formdata: {
         userID: this.$store.state.user.id,
         author: this.$store.state.user.nickname,
@@ -141,6 +123,9 @@ export default {
   components: {
     mavonEditor,
     NavVue
+  },
+  mounted() {
+    this.getImgList()
   },
   methods: {
     $imgAdd(pos, $file) {
@@ -202,6 +187,26 @@ export default {
     },
     fileBoxClick() {
       this.$refs.file.click()
+    },
+    getImgList() {
+      let res = []
+      let set = new Set()
+      for (let i = 0; i < 5; i++) {
+        let rand = Math.floor(Math.random() * 70) + 1
+        let a = {
+          value: `${this.$base_url}/static/image/articleImage/` + rand + '.jpg'
+        }
+        if (!set.has(rand)) {
+          res.push(a)
+          set.add(rand)
+        } else {
+          i--
+        }
+      }
+      this.imgList = res
+    },
+    handleImageRefresh() {
+      this.getImgList()
     }
   }
 }
@@ -267,5 +272,6 @@ button {
   padding: 0 20px;
   margin: 0 20px;
   background-color: white;
+  user-select: none;
 }
 </style>
