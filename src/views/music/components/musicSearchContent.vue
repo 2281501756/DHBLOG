@@ -1,16 +1,25 @@
 <template>
   <div class="music-search-content">
     <div class="close"><i class="el-icon-close"></i></div>
-    <song-item></song-item>
-    <song-item></song-item>
-    <song-item></song-item>
+    <div class="song-box">
+      <song-item v-for="i of song" :key="i.id" :songData="i"></song-item>
+    </div>
   </div>
 </template>
 
 <script>
 import songItem from './songItem.vue'
 export default {
-  components: { songItem }
+  components: { songItem },
+  props: {
+    song: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  },
+  mounted() {}
 }
 </script>
 
@@ -24,6 +33,11 @@ export default {
   background-color: #212121;
   border-radius: 20px;
   padding: 30px 45px;
+}
+.song-box {
+  overflow-y: auto;
+  height: 100%;
+  background-color: #212121;
 }
 .close {
   position: absolute;

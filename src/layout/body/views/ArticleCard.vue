@@ -11,11 +11,11 @@
       <div class="loading-container"></div>
     </div>
     <div class="hide"></div>
-    <div class="label">{{ articleData.label }}</div>
+    <div class="label" ref="label">{{ articleData.label }}</div>
     <div class="title">
       {{ articleData.title }}
     </div>
-
+    <div class="description">{{ articleData.description }}</div>
     <footer>
       <i class="el-icon-user"></i> {{ articleData.author }}&nbsp;&nbsp;
       <i class="el-icon-date"></i>{{ articleData.create_time }}&nbsp;&nbsp;
@@ -34,6 +34,30 @@ export default {
   data() {
     return {
       isloading: true
+    }
+  },
+  mounted() {
+    if (
+      this.articleData.label === 'js' ||
+      this.articleData.label === 'javascript'
+    ) {
+      this.$refs.label.style.backgroundColor = '#fceb3c'
+      this.$refs.label.style.color = '#777'
+    } else if (this.articleData.label === 'java') {
+      this.$refs.label.style.backgroundColor = '#fa8c16'
+    } else if (
+      this.articleData.label === 'ts' ||
+      this.articleData.label === 'typescript'
+    ) {
+      this.$refs.label.style.backgroundColor = '#1890ff'
+    } else if (this.articleData.label === 'vue') {
+      this.$refs.label.style.backgroundColor = '#389e0d'
+    } else if (this.articleData.label === 'react') {
+      this.$refs.label.style.backgroundColor = '#531dab'
+    } else if (this.articleData.label === '后端') {
+      this.$refs.label.style.backgroundColor = '#6c216d'
+    } else if (this.articleData.label === 'spring') {
+      this.$refs.label.style.backgroundColor = '#4f794a'
     }
   }
 }
@@ -60,6 +84,17 @@ export default {
 .article:hover {
   transform: scale(1.02);
 }
+.article:hover > .label {
+  transform: translateY(-60px) scale(0.7);
+}
+.article:hover > .title {
+  transform: translateY(-60px) scale(0.7);
+}
+.article:hover > .description {
+  /* transform: translateY(-50px) scale(0.7); */
+  bottom: 40%;
+}
+
 .label {
   border-radius: 5px;
   text-align: center;
@@ -71,11 +106,26 @@ export default {
   font-size: 16px;
   color: white;
   z-index: 2;
+  transition: all 1s cubic-bezier(0, 0.33, 0, 1.12);
 }
 .title {
   color: white;
   font-size: 32px;
   z-index: 2;
+  transition: all 1s cubic-bezier(0, 0.33, 0, 1.12);
+}
+.description {
+  z-index: 2;
+  font-size: 32px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 1s cubic-bezier(0, 0.33, 0, 1.12);
 }
 footer {
   position: absolute;
@@ -101,7 +151,7 @@ img {
   transition: all 0.5s;
 }
 .article:hover > .hide {
-  background-color: rgba(1, 1, 1, 0.3);
+  background-color: rgba(1, 1, 1, 0.35);
 }
 .article:hover > img {
   filter: blur(5px);

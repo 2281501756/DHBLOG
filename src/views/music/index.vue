@@ -12,7 +12,7 @@
     </div>
     <music-body></music-body>
     <music-footer></music-footer>
-    <music-search-content></music-search-content>
+    <music-search-content :song="searchSongList"></music-search-content>
   </div>
 </template>
 
@@ -25,13 +25,15 @@ import { search } from '../../api/music'
 export default {
   data() {
     return {
-      searchValue: ''
+      searchValue: '',
+      searchSongList: []
     }
   },
   methods: {
     handleSearch() {
-      search(this.searchValue, 5, 5)
+      search(this.searchValue, 10)
         .then((res) => {
+          this.searchSongList = res
           console.log(res)
         })
         .catch((e) => {

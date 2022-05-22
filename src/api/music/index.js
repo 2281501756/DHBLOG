@@ -1,6 +1,6 @@
 import require from '../../util/js/http/musicRequire'
 
-export const search = async (keywords, limit, offset) => {
+export const search = async (keywords, limit = 30, offset = 0) => {
   try {
     let res = await require({
       url: '/search',

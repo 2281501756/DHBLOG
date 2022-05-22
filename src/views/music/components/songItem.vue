@@ -1,11 +1,27 @@
 <template>
-  <div class="song-item">
-    <div>名字</div>
+  <div class="song-item" @click="playMusic">
+    <div>{{ song.name }}</div>
+    <!-- <div>{{ song.artists[0].name || '无' }}</div> -->
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: ['songData'],
+  data() {
+    return {
+      song: {}
+    }
+  },
+  mounted() {
+    this.song = this.songData
+  },
+  methods: {
+    playMusic() {
+      this.$store.dispatch('playMusic', this.song.url)
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -19,5 +35,13 @@ export default {}
 }
 .song-item:hover {
   background-color: #434343;
+}
+.song-item > div {
+  display: inline-block;
+  width: 25%;
+  margin: 0 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

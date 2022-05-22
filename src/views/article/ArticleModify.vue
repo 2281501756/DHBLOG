@@ -9,27 +9,39 @@
       tabindex="-1"
       muted="muted"
     ></video>
-    <NavVue></NavVue>
+    <NavVue style="background-color: transparent"></NavVue>
     <div style="padding: 70px 60px 40px">
       <label for="title">
         <span class="label">标题</span>
-        <input type="text" v-model="formdata.title" id="title" />
+        <el-input
+          style="display: inline-block; width: 166px"
+          placeholder="请输入标题"
+          v-model="formdata.title"
+          id="title"
+          clearable
+        >
+        </el-input>
       </label>
       <label for="description">
         <span class="label">描述</span>
-        <input type="text" v-model="formdata.description" id="description" />
+        <el-input
+          style="display: inline-block; width: 166px"
+          placeholder="请输入描述"
+          v-model="formdata.description"
+          id="description"
+          clearable
+        >
+        </el-input>
       </label>
       <label for="label">
         <span class="label">标签</span>
-        <select v-model="selected" id="label">
-          <option
-            v-for="option in options"
-            :key="option.value"
-            :value="option.value"
-          >
-            {{ option.value }}
-          </option>
-        </select>
+        <el-autocomplete
+          class="inline-input"
+          v-model="state1"
+          :fetch-suggestions="querySearch"
+          placeholder="请输入标签"
+          clearable
+        ></el-autocomplete>
       </label>
       <label for="photo">
         <span class="label">文章封面</span>
@@ -56,7 +68,7 @@
         class="now-imgae"
         :src="formdata.photo"
         alt="选中的文章封面"
-        @click="craeteImg"
+        @click="createImg"
       />
       <span></span>
     </div>
@@ -84,16 +96,14 @@
 <script>
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import axios from '../../util/js/http/index'
 import NavVue from '../../layout/body/views/Nav.vue'
-import { createDOM } from '../../util/js/create'
-import ImageFill from '@/components/imageFill'
+
 import { getArticleForID, articleModify } from '../../api/base/article'
-import { compressImage } from '../../util/js/image'
+import { mymixin } from './mixin/index'
 export default {
+  mixins: [mymixin],
   data() {
     return {
-      imgList: [],
       formdata: {
         id: 0,
         userID: this.$store.state.user.id,
@@ -103,16 +113,7 @@ export default {
         label: '前端',
         photo: `${this.$base_url}/static/image/articleImage/1.jpg`
       },
-      selected: '前端',
-      options: [
-        { text: '前端', value: '前端' },
-        { text: '后端', value: '后端' },
-        { text: 'css', value: 'css' },
-        { text: 'js', value: 'js' },
-        { text: 'ts', value: 'ts' },
-        { text: 'vue', value: 'vue' },
-        { text: 'react', value: 'react' }
-      ],
+
       articleID: 0
     }
   },
@@ -134,63 +135,22 @@ export default {
         this.formdata.content = res.data.data[0].content
         this.formdata.label = res.data.data[0].label
         this.formdata.photo = res.data.data[0].photo
-        this.selected = res.data.data[0].label
+        this.state1 = res.data.data[0].label
       }
     })
   },
-  watch: {
-    selected(newValue) {
-      this.formdata.label = newValue
-    },
-    $route() {
-      this.$destroy(this.$options.name)
-    }
-  },
+
   components: {
     mavonEditor,
     NavVue
   },
   methods: {
-    $imgAdd(pos, $file) {
-      // 第一步.将图片上传到服务器.
-      var formdata = new FormData()
-      formdata.append('file', $file)
-      axios({
-        url: '/upload',
-        method: 'post',
-        data: formdata,
-        headers: { 'Content-Type': 'multipart/form-data' }
-      }).then((res) => {
-        this.$refs.md.$img2Url(pos, `${this.$base_url + res.data.url}`)
-      })
-    },
-    up() {
-      let file = this.$refs.file.files[0]
-      compressImage(file).then((res) => {
-        file = res
-        let data = new FormData()
-        data.append('file', file)
-        axios
-          .post('/upload', data, {})
-          .then((res) => {
-            this.formdata.photo = `${this.$base_url + res.data.url}`
-            this.$message({
-              message: '上传成功',
-              type: 'success'
-            })
-          })
-          .catch((err) => {
-            console.log(err)
-            this.$message({
-              message: '上传失败',
-              type: 'error'
-            })
-          })
-      })
-    },
     modify() {
-      if (this.formdata.title === '') {
-        this.$message.error('标题不能为空')
+      if (this.formdata.title === '' || this.state1 === '') {
+        this.$message.error('标题和标签不能为空')
+        return
+      } else if (this.state1.length > 10) {
+        this.$message.error('标签太长')
         return
       }
       articleModify(this.formdata).then((res) => {
@@ -204,35 +164,6 @@ export default {
           this.$message.error('error 出错了😱')
         }
       })
-    },
-    imgListClick(value) {
-      this.formdata.photo = value
-    },
-    craeteImg() {
-      createDOM(ImageFill, { url: this.formdata.photo })
-    },
-    fileBoxClick() {
-      this.$refs.file.click()
-    },
-    getImgList() {
-      let res = []
-      let set = new Set()
-      for (let i = 0; i < 5; i++) {
-        let rand = Math.floor(Math.random() * 70) + 1
-        let a = {
-          value: `${this.$base_url}/static/image/articleImage/` + rand + '.jpg'
-        }
-        if (!set.has(rand)) {
-          res.push(a)
-          set.add(rand)
-        } else {
-          i--
-        }
-      }
-      this.imgList = res
-    },
-    handleImageRefresh() {
-      this.getImgList()
     }
   }
 }

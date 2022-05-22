@@ -5,6 +5,7 @@
         <router-view :key="this.$route.fullPath" />
       </keep-alive>
     </transition>
+    <audio id="audio"></audio>
   </div>
 </template>
 
