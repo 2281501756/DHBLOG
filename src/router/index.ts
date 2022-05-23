@@ -4,17 +4,45 @@ import Home from '../views/Home.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../layout/index.vue')
   }
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   component: () => import('../components/Login.vue')
+  // },
+  // {
+  //   path: '/article/contribute',
+  //   component: () => import('../views/article/ArticleContribute.vue')
+  // },
+  // {
+  //   path: '/article/modify/:id',
+  //   component: () => import('../views/article/ArticleModify.vue')
+  // },
+  // {
+  //   path: '/article/:id',
+  //   component: () => import('../views/article/index.vue')
+  // },
+  // {
+  //   path: '/user/modify',
+  //   component: () => import('../views/userModify/index.vue')
+  // },
+  // {
+  //   path: '/user/personal/center/:id',
+  //   component: () => import('../views/personalCenter/PersonalCenter.vue')
+  // },
+  // {
+  //   path: '/news',
+  //   component: () => import('../views/news/news.vue')
+  // },
+  // {
+  //   path: '/music',
+  //   component: () => import('../views/music/index.vue')
+  // },
+  // {
+  //   path: '/404',
+  //   component: () => import('../components/404.vue')
+  // }
 ]
 
 const router = createRouter({

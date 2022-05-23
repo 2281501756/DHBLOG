@@ -1,0 +1,41 @@
+import axios, { AxiosInstance } from 'axios'
+import NProgress from 'nprogress'
+
+export class httpRequireClass {
+  baseURL: string
+  instance: AxiosInstance
+  constructor(baseURL: string) {
+    this.baseURL = baseURL
+    this.instance = axios.create({
+      baseURL: baseURL,
+      timeout: 20000
+    })
+    this.initInterceptors()
+  }
+  initInterceptors() {
+    this.instance.interceptors.request.use(
+      (config) => {
+        // 开启进度条
+        NProgress.start()
+        return config
+      },
+      (error) => {
+        return Promise.reject(error)
+      }
+    )
+
+    // 响应拦截器
+    this.instance.interceptors.response.use(
+      (response) => {
+        // 关闭进度条
+        NProgress.done()
+        return response
+      },
+      (error) => {
+        // 关闭进度条
+        NProgress.done()
+        return Promise.reject(error)
+      }
+    )
+  }
+}
